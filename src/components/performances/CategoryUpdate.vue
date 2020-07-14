@@ -43,7 +43,7 @@ export default {
                 Authorization: `Token ${this.$cookies.get('auth-token')}`,
             }
         }
-        axios.put(`${BACK_URL}/performances/categoty/`,this.updatecategories,axiosConfig)
+        axios.put(`${BACK_URL}/performances/category/`,this.updatecategories,axiosConfig)
         .then((response)=>{
             this.changecategory2(response)
         })

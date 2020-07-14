@@ -1,7 +1,7 @@
 <template>
 <div>
     <div v-for="club in Clubs" :key="club.name">
-        <ClubsOne :club="club"/>
+        <ClubsListitems :club="club"/>
     </div>
 </div>
 </template>
@@ -10,11 +10,11 @@
 import axios from 'axios'
 const BACK_URL = 'http://127.0.0.1:8000'
 
-import ClubsOne from '@/components/clubs/ClubsOne.vue'
+import ClubsListitems from '@/components/clubs/ClubsListitems.vue'
 export default {
-    name:'Club',
+    name:'ClubList',
     components:{
-        ClubsOne,
+        ClubsListitems,
     },
     data(){
         return{
