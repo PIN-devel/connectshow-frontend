@@ -7,7 +7,6 @@ import VueSession from 'vue-session'
 //<--도연
 import VueCookies from 'vue-cookies'
 import VueSimpleAlert from "vue-simple-alert"
-import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -31,6 +30,5 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  store,
   render: h => h(App)
 }).$mount('#app')
