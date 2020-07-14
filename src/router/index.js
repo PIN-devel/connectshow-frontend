@@ -14,6 +14,9 @@ import ClubUpdate from '../views/clubs/ClubUpdate.vue'
 import PerformanceCreate from '../views/performances/PerformanceCreate.vue'
 import PerformanceUpdate from '../views/performances/PerformanceUpdate.vue'
 
+//수미
+import ClubDetail from '../views/ClubDetail.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -61,6 +64,11 @@ Vue.use(VueRouter)
     path: '/performanceupdate/:ID',
     name: 'PerformanceUpdate',
     component: PerformanceUpdate
+  },
+  {
+    path: '/clubs/:clubId',
+    name: 'ClubDetail',
+    component: ClubDetail
   },
 ]
 
