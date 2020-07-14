@@ -20,7 +20,7 @@
         <input type="email" class="form-control" id="email" v-model="signupData.email">
       </div>
         <b-form-group label="">
-        <b-form-checkbox-group id="checkbox-group-2" v-model="categoryData" name="flavour-2">
+        <b-form-checkbox-group id="checkbox-group-2" v-model="signupData.categoryData" name="flavour-2">
             <b-form-checkbox :value="1" @click="inputcategory">1</b-form-checkbox>
             <b-form-checkbox :value="2" @click="inputcategory">2</b-form-checkbox>
             <b-form-checkbox :value="3" @click="inputcategory">3</b-form-checkbox>

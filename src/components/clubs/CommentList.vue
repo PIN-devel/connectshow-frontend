@@ -10,7 +10,7 @@
 
 <script>
 import axios from 'axios'
-import CommentListItem from '@/components/CommentListItem'
+import CommentListItem from '@/components/clubs/CommentListItem'
 
 const BACK_URL = 'http://localhost:8000'
 

@@ -12,7 +12,7 @@
 
 <script>
 import axios from 'axios'
-import ClubCommunityItem from '@/components/ClubCommunityItem.vue'
+import ClubCommunityItem from '@/components/clubs/ClubCommunityItem.vue'
 
 import InfiniteLoading from 'vue-infinite-loading'
 

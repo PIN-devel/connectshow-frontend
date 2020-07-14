@@ -28,10 +28,10 @@
 
 <script>
 // @ is an alias to /src
-import ClubProfile from '@/components/ClubProfile.vue'
-import ClubDescription from '@/components/ClubDescription.vue'
-import ClubPerformances from '@/components/ClubPerformances.vue'
-import ClubCommunity from '@/components/ClubCommunity.vue'
+import ClubProfile from '@/components/clubs/ClubProfile.vue'
+import ClubDescription from '@/components/clubs/ClubDescription.vue'
+import ClubPerformances from '@/components/clubs/ClubPerformances.vue'
+import ClubCommunity from '@/components/clubs/ClubCommunity'
 
 import axios from 'axios'
 

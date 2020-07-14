@@ -102,7 +102,7 @@ export default {
         this.categories=data.data.category
     },
     getcategory(){
-      axios.get(`${BACK_URL}/performances/categoty/`,this.config)
+      axios.get(`${BACK_URL}/performances/category/`,this.config)
       .then((response)=>{
         this.categories=response.data.category
       })

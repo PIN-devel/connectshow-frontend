@@ -11,7 +11,7 @@
 
 <script>
 import axios from 'axios'
-import ClubPerformanceItem from '@/components/ClubPerformanceItem'
+import ClubPerformanceItem from '@/components/clubs/ClubPerformanceItem'
 
 const BACK_URL = 'http://localhost:8000'
 

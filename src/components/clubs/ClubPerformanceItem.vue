@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import PerformanceDetail from './performances/PerformanceDetail'
+import PerformanceDetail from '@/components/performances/PerformanceDetail'
 export default {
   name: 'ClubPerformanceItem',
   props: {

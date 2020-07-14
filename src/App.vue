@@ -56,7 +56,7 @@ export default {
           Authorization : `Token ${key}`
         },
       }
-      axios.post(`${BACK_URL}/performances/categoty/`,data,axiosConfig)
+      axios.post(`${BACK_URL}/performances/category/`,data,axiosConfig)
       .then((response)=>{
         console.log(response)
       })

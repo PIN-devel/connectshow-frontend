@@ -32,7 +32,7 @@
 
 <script>
 import axios from 'axios'
-import CommentList from '@/components/CommentList.vue'
+import CommentList from '@/components/clubs/CommentList.vue'
 
 const BACK_URL = 'http://localhost:8000'
 
