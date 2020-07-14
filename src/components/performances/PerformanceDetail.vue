@@ -68,16 +68,12 @@
 import axios from "axios";
 import { StarRating } from "vue-rate-it";
 
-import Review from "../components/Review";
-import ReviewInputForm from "../components/ReviewInputForm";
-import SimpleProfile from "../components/SimpleProfile";
+import Review from "./Review";
+import ReviewInputForm from "./ReviewInputForm";
+import SimpleProfile from "../SimpleProfile";
 
 const SERVER_URL = "http://127.0.0.1:8000/";
-const config = {
-  headers: {
-    Authorization: "Token 408305f8635afd8decafeca9d25ca13268324ca1"
-  }
-};
+
 
 export default {
   name: "PerformanceDetail",
@@ -115,6 +111,11 @@ export default {
     },
     reviewCreate(reviewData) {
       console.log(reviewData);
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      };
       axios
         .post(
           `${SERVER_URL}performances/${this.performanceId}/reviews/`,

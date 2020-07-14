@@ -2,14 +2,14 @@
   <div>
         <b-form-group label="">
         <b-form-checkbox-group id="checkbox-group-2" v-model="updatecategories" name="flavour-2">
-            <b-form-checkbox :value="9" @click="inputcategory">1</b-form-checkbox>
-            <b-form-checkbox :value="10" @click="inputcategory">2</b-form-checkbox>
-            <b-form-checkbox :value="11" @click="inputcategory">3</b-form-checkbox>
-            <b-form-checkbox :value="12" @click="inputcategory">4</b-form-checkbox>
-            <b-form-checkbox :value="13" @click="inputcategory">5</b-form-checkbox>
-            <b-form-checkbox :value="14" @click="inputcategory">6</b-form-checkbox>
-            <b-form-checkbox :value="15" @click="inputcategory">7</b-form-checkbox>
-            <b-form-checkbox :value="16" @click="inputcategory">8</b-form-checkbox>
+            <b-form-checkbox :value="1" @click="inputcategory">1</b-form-checkbox>
+            <b-form-checkbox :value="2" @click="inputcategory">2</b-form-checkbox>
+            <b-form-checkbox :value="3" @click="inputcategory">3</b-form-checkbox>
+            <b-form-checkbox :value="4" @click="inputcategory">4</b-form-checkbox>
+            <b-form-checkbox :value="5" @click="inputcategory">5</b-form-checkbox>
+            <b-form-checkbox :value="6" @click="inputcategory">6</b-form-checkbox>
+            <b-form-checkbox :value="7" @click="inputcategory">7</b-form-checkbox>
+            <b-form-checkbox :value="8" @click="inputcategory">8</b-form-checkbox>
         </b-form-checkbox-group>
         </b-form-group>        
       <button @click="changecategory">관심 카테고리 정보 수정</button>

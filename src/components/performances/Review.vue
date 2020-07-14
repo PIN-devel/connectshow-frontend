@@ -30,15 +30,11 @@
 import axios from "axios";
 import { StarRating } from "vue-rate-it";
 
-import SimpleProfile from "../components/SimpleProfile";
-import ReviewInputForm from "../components/ReviewInputForm";
+import SimpleProfile from "../SimpleProfile";
+import ReviewInputForm from "./ReviewInputForm";
+
 
 const SERVER_URL = "http://127.0.0.1:8000/";
-const config = {
-  headers: {
-    Authorization: "Token 408305f8635afd8decafeca9d25ca13268324ca1"
-  }
-};
 
 export default {
   name: "Review",
@@ -58,6 +54,11 @@ export default {
 
   methods: {
     reviewDelete() {
+      const config = {
+                        headers: {
+                          Authorization: `Token ${this.$cookies.get('auth-token')}`
+                        }
+                      };                                  
       const reviewId = this.review.id;
       axios
         .delete(`${SERVER_URL}performances/reviews/${reviewId}/`, config)
@@ -69,6 +70,11 @@ export default {
       this.updateState = !this.updateState;
     },
     reviewUpdate(reviewData) {
+      const config = {
+                  headers: {
+                    Authorization: `Token ${this.$cookies.get('auth-token')}`
+                  }
+                }; 
       const reviewId = this.review.id;
       axios
         .put(

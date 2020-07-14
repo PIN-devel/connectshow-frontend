@@ -26,7 +26,7 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/',
+    path: '/calender',
     name: 'CalenderView',
     component: CalenderView 
   },

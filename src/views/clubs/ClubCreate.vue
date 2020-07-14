@@ -45,8 +45,8 @@ export default {
       }
       let clubdata = new FormData()
       clubdata.append('club_image',this.clubdata.club_image)
-      clubdata.append('club_name',this.clubdata.description)
-      clubdata.append('description',this.clubdata.club_name)
+      clubdata.append('club_name',this.clubdata.club_name)
+      clubdata.append('description',this.clubdata.description)
       axios.post(`${BACK_URL}/accounts/clubs/`,clubdata,axiosConfig)
       .then(()=>{
       })
