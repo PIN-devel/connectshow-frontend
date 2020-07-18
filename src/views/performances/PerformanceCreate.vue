@@ -27,10 +27,17 @@
         <b-form-input :id="`type-${'title'}`" :type="'title'" v-model="performance.time"></b-form-input>
         <small id="titlehelper" class="form-text text-muted">ex)매주 수요일 19:00</small>
       </div>
+      <div class="form-group">
+        <label for="non_user_name">출연자</label>
+        <div>{{performance.non_user_names}}</div>
+        <b-form-input :id="`type-${'title'}`" :type="'title'" v-model="non_user_name"></b-form-input>
+        <button @click="addNonUserName">+</button>
+        <small id="titlehelper" class="form-text text-muted"></small>
+      </div>
       <!-- poster_image -->
       <div class="form-group">
-          <label for="exampleFormControlFile1">포스터</label>
-          <b-form-file type="file" id="file" ref="file" v-on:change="performanceimage()"></b-form-file>
+        <label for="exampleFormControlFile1">포스터</label>
+        <b-form-file type="file" id="file" ref="file" v-on:change="performanceimage()"></b-form-file>
       </div>
       <!-- description -->
       <div class="form-group">
@@ -48,59 +55,64 @@
 </template>
 
 <script>
-import axios from 'axios'
-const BACK_URL = 'http://127.0.0.1:8000'
+import axios from "axios";
+const BACK_URL = "http://127.0.0.1:8000";
 
 export default {
-    name:"PerformanceCreate",
-    data(){
-      return{
-        performance:{
-          title:'',
-          start_date:'',
-          end_date:'',
-          running_time:'',
-          time:'',
-          poster_image:'',
-          description:'',
-          url:'',
-          // category:'',
-          // clubs:'',
-          // casts:'',
+  name: "PerformanceCreate",
+  data() {
+    return {
+      performance: {
+        title: "",
+        start_date: "",
+        end_date: "",
+        running_time: "",
+        time: "",
+        poster_image: "",
+        description: "",
+        url: "",
+        category_id: 1,
+        club_id: 2,
+        non_user_names: []
+      },
+      non_user_name: ""
+    };
+  },
+  methods: {
+    createperformance() {
+      const axiosConfig = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get("auth-token")}`
         }
-      }
+      };
+      let performancedata = new FormData();
+      performancedata.append("title", this.performance.title);
+      performancedata.append("start_date", this.performance.start_date);
+      performancedata.append("end_date", this.performance.end_date);
+      performancedata.append("running_time", this.performance.running_time);
+      performancedata.append("time", this.performance.time);
+      //performancedata.append('poster_image',this.performance.poster_image)
+      // performancedata.append('description',this.performance.description)
+      performancedata.append("url", this.performance.url);
+      performancedata.append("category_id", this.performance.category_id);
+      performancedata.append("club_id", this.performance.club_id);
+      axios
+        .post(`${BACK_URL}/performances/`, performancedata, axiosConfig)
+        .then(() => {})
+        .catch(err => {
+          console.log(err);
+        });
     },
-      methods:{
-        createperformance(){
-        const axiosConfig = {
-          headers:{
-            Authorization : `Token ${this.$cookies.get('auth-token')}`
-          },
-        }
-        let performancedata = new FormData()
-        performancedata.append('title',this.performance.title)
-        performancedata.append('start_date',this.performance.start_date)
-        performancedata.append('end_date',this.performance.end_date)
-        performancedata.append('running_time',this.performance.running_time)
-        performancedata.append('running_time',this.performance.running_time)
-        performancedata.append('poster_image',this.performance.poster_image)
-        // performancedata.append('description',this.performance.description)
-        performancedata.append('url',this.performance.url)
-        axios.post(`${BACK_URL}/performances/`,performancedata,axiosConfig)
-        .then(()=>{
-        })
-        .catch((err)=>{
-          console.log(err)
-        })
-      },
-      performanceimage(){
-        this.performance.poster_image = this.$refs.file.files[0]
-      },
+    performanceimage() {
+      this.performance.poster_image = this.$refs.file.files[0];
+    },
+    addNonUserName() {
+      this.performance.non_user_names.push(this.non_user_name);
     }
-}
+  }
+};
 </script>
 
 <style>
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
-
 </style>
