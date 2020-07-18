@@ -31,7 +31,7 @@
         <label for="non_user_name">출연자</label>
         <div>{{performance.non_user_names}}</div>
         <b-form-input :id="`type-${'title'}`" :type="'title'" v-model="non_user_name"></b-form-input>
-        <button @click="addNonUserName">+</button>
+        <button @click.prevent="addNonUserName">+</button>
         <small id="titlehelper" class="form-text text-muted"></small>
       </div>
       <!-- poster_image -->
@@ -107,7 +107,10 @@ export default {
       this.performance.poster_image = this.$refs.file.files[0];
     },
     addNonUserName() {
-      this.performance.non_user_names.push(this.non_user_name);
+      if (this.non_user_name !== "") {
+        this.performance.non_user_names.push(this.non_user_name);
+        this.non_user_name = "";
+      }
     }
   }
 };
