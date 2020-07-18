@@ -85,7 +85,7 @@ export default {
         description: "",
         url: "",
         category_id: 1,
-        club_id: 2,
+        club_id: this.$route.params.clubId,
         non_user_names: [],
         user_ids: []
       },
