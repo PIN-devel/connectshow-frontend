@@ -48,7 +48,7 @@
         </div>
       </nav>
     </div>
-    <router-view @submit-login-data="login" @submit-signup-data="signup" :key="$route.fullPath" />
+    <router-view @submit-login-data="login" @submit-signup-data="signup" />
   </div>
 </template>
 <script>
