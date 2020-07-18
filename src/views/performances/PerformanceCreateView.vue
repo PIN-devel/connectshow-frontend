@@ -12,9 +12,9 @@
         <b-form-datepicker id="example-datepicker" v-model="performance.start_date" class="mb-2"></b-form-datepicker>
       </div>
       <!-- end_date -->
-      <div class="form-group">
-        <label for="example-datepicker">종영날짜</label>
-        <b-form-datepicker id="example-datepicker" v-model="performance.end_date" class="mb-2"></b-form-datepicker>
+     <div class="form-group">
+        <label for="end-datepicker">종영날짜</label>
+        <b-form-datepicker id="end-datepicker" v-model="performance.end_date" class="mb-2"></b-form-datepicker>
       </div>
       <!-- running_time -->
       <div class="form-group">
