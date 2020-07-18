@@ -1,103 +1,103 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
-import CalenderView from  '@/views/CalenderView.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "@/views/Home.vue";
+import CalenderView from "@/views/CalenderView.vue";
 
 //도연
-import SignupView from '@/views/accounts/SignupView.vue'
-import LoginView from '@/views/accounts/LoginView.vue'
-import UserProfileUpdateView from '@/views/accounts/UserProfileUpdateView.vue'
-import ClubIndexView from '@/views/clubs/ClubIndexView.vue'
-import ClubCreateView from '@/views/clubs/ClubCreateView.vue'
-import ClubUpdateView from '@/views/clubs/ClubUpdateView.vue'
-import PerformanceCreateView from '@/views/performances/PerformanceCreateView.vue'
-import PerformanceUpdateView from '@/views/performances/PerformanceUpdateView.vue'
-import ArticleCreateView from '@/views/community/ArticleCreateView.vue'
-import ArticleUpdateView from '@/views/community/ArticleUpdateView.vue'
+import SignupView from "@/views/accounts/SignupView.vue";
+import LoginView from "@/views/accounts/LoginView.vue";
+import UserProfileUpdateView from "@/views/accounts/UserProfileUpdateView.vue";
+import ClubIndexView from "@/views/clubs/ClubIndexView.vue";
+import ClubCreateView from "@/views/clubs/ClubCreateView.vue";
+import ClubUpdateView from "@/views/clubs/ClubUpdateView.vue";
+import PerformanceCreateView from "@/views/performances/PerformanceCreateView.vue";
+import PerformanceUpdateView from "@/views/performances/PerformanceUpdateView.vue";
+import ArticleCreateView from "@/views/community/ArticleCreateView.vue";
+import ArticleUpdateView from "@/views/community/ArticleUpdateView.vue";
 
 //수미
-import ClubDetailView from '@/views/clubs/ClubDetailView.vue'
-import UserDetailView from '@/views/users/UserDetailView.vue'
+import ClubDetailView from "@/views/clubs/ClubDetailView.vue";
+import UserDetailView from "@/views/users/UserDetailView.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes = [
+const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/calender',
-    name: 'CalenderView',
-    component: CalenderView 
+    path: "/calender",
+    name: "CalenderView",
+    component: CalenderView,
   },
   {
-    path: '/signup',
-    name: 'Signupview',
-    component: SignupView
+    path: "/signup",
+    name: "Signupview",
+    component: SignupView,
   },
   {
-    path: '/login',
-    name: 'Loginview',
-    component: LoginView
+    path: "/login",
+    name: "Loginview",
+    component: LoginView,
   },
   {
-    path: '/profileupdate/:ID',
-    name: 'UserProfileUpdateView',
+    path: "/profileupdate/:ID",
+    name: "UserProfileUpdateView",
     component: UserProfileUpdateView,
   },
   {
-    path: '/clubindex',
-    name: 'ClubIndexView',
-    component: ClubIndexView
+    path: "/clubindex",
+    name: "ClubIndexView",
+    component: ClubIndexView,
   },
   {
-    path: '/clubcreate',
-    name: 'ClubCreateView',
-    component: ClubCreateView
+    path: "/clubcreate",
+    name: "ClubCreateView",
+    component: ClubCreateView,
   },
   {
-    path: '/clubupdate/:ID',
-    name: 'ClubUpdateView',
-    component: ClubUpdateView
+    path: "/clubupdate/:ID",
+    name: "ClubUpdateView",
+    component: ClubUpdateView,
   },
   {
-    path: '/performancecreate',
-    name: 'PerformanceCreateView',
-    component: PerformanceCreateView
+    path: "/clubs/:clubId/performancecreate",
+    name: "PerformanceCreateView",
+    component: PerformanceCreateView,
   },
   {
-    path: '/performanceupdate/:ID',
-    name: 'PerformanceUpdateView',
-    component: PerformanceUpdateView
+    path: "/performanceupdate/:ID",
+    name: "PerformanceUpdateView",
+    component: PerformanceUpdateView,
   },
   {
-    path: '/clubs/:clubId',
-    name: 'ClubDetailView',
-    component: ClubDetailView
+    path: "/clubs/:clubId",
+    name: "ClubDetailView",
+    component: ClubDetailView,
   },
   {
-    path: '/clubs/:clubId/article',
-    name: 'ArticleCreateView',
-    component: ArticleCreateView
+    path: "/clubs/:clubId/article",
+    name: "ArticleCreateView",
+    component: ArticleCreateView,
   },
   {
-    path: '/article/:articleID',
-    name: 'ArticleUpdateView',
-    component: ArticleUpdateView
+    path: "/article/:articleID",
+    name: "ArticleUpdateView",
+    component: ArticleUpdateView,
   },
   {
-    path: '/users/:userId',
-    name: 'UserDetailView',
-    component: UserDetailView
+    path: "/users/:userId",
+    name: "UserDetailView",
+    component: UserDetailView,
   },
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

@@ -29,7 +29,8 @@
       </div>
       <div class="form-group">
         <label for="non_user_name">출연자</label>
-        <div>{{performance.non_user_names}}</div>
+        <div>{{clubMembers}}</div>
+        <PerformanceCreateButton v-for="member in clubMembers" :key="member.id" :user="member" />
         <b-form-input :id="`type-${'title'}`" :type="'title'" v-model="non_user_name"></b-form-input>
         <button @click.prevent="addNonUserName">+</button>
         <small id="titlehelper" class="form-text text-muted"></small>
@@ -56,10 +57,14 @@
 
 <script>
 import axios from "axios";
+import PerformanceCreateButton from "../../components/performances/PerformanceCreateCastButton";
 const BACK_URL = "http://127.0.0.1:8000";
 
 export default {
   name: "PerformanceCreate",
+  components: {
+    PerformanceCreateButton
+  },
   data() {
     return {
       performance: {
@@ -75,10 +80,22 @@ export default {
         club_id: 2,
         non_user_names: []
       },
-      non_user_name: ""
+      non_user_name: "",
+      clubMembers: []
     };
   },
   methods: {
+    fetchClubMember() {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get("auth-token")}`
+        }
+      };
+      axios
+        .get(`${BACK_URL}/accounts/clubs/${this.$route.params.clubId}/`, config)
+        .then(res => (this.clubMembers = res.data.data.club_members))
+        .catch(err => console.log(err));
+    },
     createperformance() {
       const axiosConfig = {
         headers: {
@@ -112,6 +129,9 @@ export default {
         this.non_user_name = "";
       }
     }
+  },
+  created() {
+    this.fetchClubMember();
   }
 };
 </script>
