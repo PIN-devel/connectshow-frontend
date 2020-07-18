@@ -1,31 +1,38 @@
 <template>
   <div class="text-left m-5">
-    <h3>Info</h3>
-    <hr class="short-hr">
-    <p>{{ club.club_detail.description }}</p>
-    <h3>Members</h3>
-    <hr class="short-hr">
-    <div v-for="member in club.club_members" :key="member.id">
-      <div class="box-member hovereffect">
-        <div>
-          <img class="profile" src="https://i.imgur.com/At1IG6H.png" alt="profile_image">
-          <span class="username">username</span>
-        </div>
-
-        <div class="overlay">
-          <a v-if="isMaster" class="info" @click="clubOut" href="#">추방</a>
-          <a v-else class="info" href="#">프로필</a>
+    <div>
+      <h3>Info</h3>
+      <hr class="short-hr">
+      <p>{{ club.club_detail.description }}</p>
+    </div>
+    <div class="my-4">
+      <h3>Members</h3>
+      <hr class="short-hr">
+      <div v-for="member in club.club_members" :key="member.id">
+        <div class="card border-0 profile text-center hovereffect">
+          <div>
+            <img class="card-img" src="https://i.imgur.com/At1IG6H.png" alt="profile_image">
+            <span>{{ member.username }}</span>
+          </div>
+          <div class="card-img-overlay d-flex justify-content-center align-items-center img-hover-zoom">
+            <button v-if="isMaster" class="btn" @click="clubOut(member.id)">추방</button>
+            <button v-else class="btn">프로필</button>
+          </div>
         </div>
       </div>
+      <div class="member-bottom"></div>
     </div>
-    <div v-if="isMaster">
+
+    <div v-if="isMaster" class="my-4">
+      <h3>Waiting list</h3>
+      <hr class="short-hr">
       <div v-for="member in club.club_waiting_members" :key="member.id">
-        <div class="box-member hovereffect">
-          <img class="profile" src="https://i.imgur.com/At1IG6H.png" alt="profile_image">
-          <p>이름</p>
-          <div class="overlay">
-            <a v-if="isMaster" class="info" @click="clubIn" href="#">승인</a>
-            <a v-if="isMaster" class="info" @click="clubOut" href="#">거절</a>
+        <div class="card border-0 profile text-center hovereffect">
+          <img class="card-img" src="https://i.imgur.com/At1IG6H.png" alt="profile_image">
+          <span>{{ member.username }}</span>
+          <div class="">
+            <button v-if="isMaster" class="btn btn-light" @click="clubIn(member.id)">승인</button>
+            <button v-if="isMaster" class="btn btn-light" @click="clubOut(member.id)">거절</button>
           </div>
         </div>
       </div>
@@ -46,18 +53,18 @@ export default {
     isChanged: Boolean,
   },
   methods: {
-    clubIn(){
+    clubIn(userId){
       const club_id = this.$route.params.clubId
-      axios.post(BACK_URL + `/accounts/clubs/${club_id}/apply/`, null,  { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+      axios.post(BACK_URL + `/accounts/clubs/${club_id}/user/${userId}/`, null, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
         .then((res) => {
           this.$emit('member-change')
           console.log(res.data.data)
         })
         .catch((err) => { console.log(err.response.data) })
     },
-    clubOut(){
+    clubOut(userId){
       const club_id = this.$route.params.clubId
-      axios.delete(BACK_URL + `/accounts/clubs/${club_id}/apply/`, null,  { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+      axios.delete(BACK_URL + `/accounts/clubs/${club_id}/user/${userId}/`, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
         .then((res) => {
           this.$emit('member-change')
           console.log(res.data.data)
@@ -69,16 +76,12 @@ export default {
 </script>
 
 <style>
-  .box-member {
-    width: 160px;
-    height: 110px;
-  }
   .hovereffect {
     float: left;
     overflow: hidden;
     position: relative;
-    /* text-align: center; */
-    cursor: default;
+    text-align: center;
+    cursor: pointer;
   }
   .hovereffect .overlay {
     width: 100%;
@@ -91,52 +94,28 @@ export default {
   .hovereffect img {
     display: block;
     position: relative;
-    -webkit-transition: all 0.4s ease-in;
-    transition: all 0.4s ease-in;
   }
   .hovereffect:hover img {
     filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
     filter: grayscale(1) blur(1px);
     -webkit-filter: grayscale(1) blur(1px);
-    /* -webkit-transform: scale(1.2); */
-    /* -ms-transform: scale(1.2); */
-    /* transform: scale(1.2); */
+
   }
-  .hovereffect a.info {
-    display: inline-block;
-    text-decoration: none;
-    padding: 7px 14px;
-    border: 1px solid #fff;
-    background-color: transparent;
+  .img-hover-zoom button {
+    visibility: hidden;
   }
-  .hovereffect a.info:hover {
-    box-shadow: 0 0 5px #fff;
+  .img-hover-zoom:hover{
+    cursor: pointer;
   }
-  .hovereffect a.info, .hovereffect h2 {
-    -webkit-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    transform: scale(0.7);
-    -webkit-transition: all 0.4s ease-in;
-    transition: all 0.4s ease-in;
-    opacity: 0;
-    filter: alpha(opacity=0);
-    color: #fff;
-    text-transform: uppercase;
-  }
-  .hovereffect:hover a.info, .hovereffect:hover h2 {
-    opacity: 1;
-    filter: alpha(opacity=100);
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
+  .img-hover-zoom:hover button {
+    visibility: visible;
+    font-size: 30px;
   }
   .short-hr {
-    display: block;
-    margin: 20px 0px;
-    width: 10%;
-    /* border-bottom: 1px solid #bcbcbc; */
+    width: 5vw;
+    margin-left: 0;
   }
-  .username {
-    z-index: -1;
+  .member-bottom {
+    clear: both;
   }
 </style>

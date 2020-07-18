@@ -15,7 +15,8 @@ import PerformanceCreate from '../views/performances/PerformanceCreate.vue'
 import PerformanceUpdate from '../views/performances/PerformanceUpdate.vue'
 
 //수미
-import ClubDetail from '../views/ClubDetail.vue'
+import ClubDetail from '../views/clubs/ClubDetail.vue'
+import UserDetail from '../views/users/UserDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -69,6 +70,11 @@ Vue.use(VueRouter)
     path: '/clubs/:clubId',
     name: 'ClubDetail',
     component: ClubDetail
+  },
+  {
+    path: '/users/:userId',
+    name: 'UserDetail',
+    component: UserDetail
   },
 ]
 

@@ -5,7 +5,7 @@
       <div class="d-flex flex-row justify-content-between">
         <h5>{{ comment.user.username }}</h5>
         <div v-if="isAuthor">
-          <a href="#none" @click="deleteComment">삭제</a>
+          <button class="btn btn-link" @click="deleteComment">삭제</button>
         </div>
       </div>
       <p class="">{{ comment.content }}</p>
@@ -31,24 +31,25 @@ export default {
   },
   methods: {
     deleteComment(){
-      axios.delete(BACK_URL + `/community/comments/${this.comment.id}/`, null, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
-        .then((res) => {
-          console.log(res.data)
+      axios.delete(BACK_URL + `/community/comments/${this.comment.id}/`, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+        .then(() => {
+          this.$emit('comment-delete', this.comment.id)
         })
         .catch((err) => { console.log(err.response.data) })
     },
     checkAuth(){
-      axios.get(BACK_URL + '/accounts/', null, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
-        .then((res) => {
-          console.log(res.data.data, "하하하")
-          if (res.data.data.user.id === this.comment.user.id){
-            this.isAuthor = true
-          } else{
-            this.isAuthor = false
-          }
-        })
-        .catch((err) => { console.log(err.response.data) })
-    },
+      if (this.$cookies.get("auth-token")){
+        axios.get(BACK_URL + '/accounts/', { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+          .then((res) => {
+            if (res.data.data.id === this.comment.user.id){
+              this.isAuthor = true
+            } else{
+              this.isAuthor = false
+            }
+              })
+          .catch((err) => { console.log(err.response.data) })
+        }
+    }
   },
   mounted(){
     this.checkAuth()
