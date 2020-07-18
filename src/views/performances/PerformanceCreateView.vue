@@ -30,7 +30,15 @@
       <div class="form-group">
         <label for="non_user_name">출연자</label>
         <div>{{clubMembers}}</div>
-        <PerformanceCreateButton v-for="member in clubMembers" :key="member.id" :user="member" />
+        <div>non user cast: {{performance.non_user_names}}</div>
+        <div>user cast: {{performance.user_ids}}</div>
+        <PerformanceCreateButton
+          v-for="member in clubMembers"
+          :key="member.id"
+          :user="member"
+          @add-member-id="addMemberId"
+          @delete-member-id="deleteMemberId"
+        />
         <b-form-input :id="`type-${'title'}`" :type="'title'" v-model="non_user_name"></b-form-input>
         <button @click.prevent="addNonUserName">+</button>
         <small id="titlehelper" class="form-text text-muted"></small>
@@ -78,7 +86,8 @@ export default {
         url: "",
         category_id: 1,
         club_id: 2,
-        non_user_names: []
+        non_user_names: [],
+        user_ids: []
       },
       non_user_name: "",
       clubMembers: []
@@ -95,6 +104,13 @@ export default {
         .get(`${BACK_URL}/accounts/clubs/${this.$route.params.clubId}/`, config)
         .then(res => (this.clubMembers = res.data.data.club_members))
         .catch(err => console.log(err));
+    },
+    addMemberId(Id) {
+      this.performance.user_ids.push(Id);
+    },
+    deleteMemberId(Id) {
+      const idx = this.performance.user_ids.indexOf(Id);
+      this.performance.user_ids.splice(idx, 1);
     },
     createperformance() {
       const axiosConfig = {

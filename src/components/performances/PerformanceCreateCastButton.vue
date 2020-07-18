@@ -10,20 +10,19 @@ export default {
   },
   data() {
     return {
-      isChecked: false,
-      userId: -1
+      isChecked: false
     };
   },
   methods: {
     checked() {
       this.isChecked = !this.isChecked;
-      this.isChecked ? this.addId() : this.deleteId();
+      this.isChecked ? this.addMemberId() : this.deleteMemberId();
     },
-    addId() {
-      console.log("add");
+    addMemberId() {
+      this.$emit("add-member-id", this.user.id);
     },
-    deleteId() {
-      console.log("delete");
+    deleteMemberId() {
+      this.$emit("delete-member-id", this.user.id);
     }
   }
 };
