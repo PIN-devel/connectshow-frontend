@@ -1,12 +1,17 @@
 <template>
-  <div>
-      <div>
-          {{ performanceTitle }}
-      </div>
-      <img :src="performanceImg" alt="poster">
-      <button class="btn btn-primary" data-toggle="modal" :data-target="'#performance-'+performance.id">modal</button>
-      <PerformanceDetail :performanceId="performance.id"/> 
-  </div>
+      <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" :src="performanceImg" alt="poster" width="100%" height="225">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button class="btn btn-primary" data-toggle="modal" :data-target="'#performance-'+performance.id">modal</button>
+                    <PerformanceDetail :performanceId="performance.id"/> 
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
 </template>
 
 <script>

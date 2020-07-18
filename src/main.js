@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueSession from 'vue-session'
+import vueCalendar from "vue2-simple-calendar"
+import "./assets/vue2-simple-calendar.css";
 
 
 //<--도연
@@ -14,7 +16,9 @@ import wysiwyg from "vue-wysiwyg";
 Vue.use(wysiwyg, {}); // config is optional. more below
 
 Vue.use(BootstrapVue)
-
+Vue.use(vueCalendar, {
+  // configuration goes here.
+})
 var sessionOptions = {
   persist: true
 }
