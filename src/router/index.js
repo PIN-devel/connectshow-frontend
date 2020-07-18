@@ -18,7 +18,8 @@ import ArticleCreate from '../views/community/ArticleCreate.vue'
 import ArticleUpdate from '../views/community/ArticleUpdate.vue'
 
 //수미
-import ClubDetail from '../views/ClubDetail.vue'
+import ClubDetail from '../views/clubs/ClubDetail.vue'
+import UserDetail from '../views/users/UserDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -87,6 +88,11 @@ Vue.use(VueRouter)
     path: '/article/:articleID',
     name: 'ArticleUpdate',
     component: ArticleUpdate
+  },
+  {
+    path: '/users/:userId',
+    name: 'UserDetail',
+    component: UserDetail
   },
 ]
 
