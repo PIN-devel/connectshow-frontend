@@ -52,6 +52,8 @@ export default {
             data.append('image',this.image)
             axios.post(`${BACK_URL}/community/${this.$route.params.clubId}/`,data,axiosConfig)
             .then(()=>{
+                // history.back()
+                this.$router.push({ name: 'ClubDetailView', params: { clubId: `${this.$route.params.clubId}` }})
             })
             .catch((err)=>{
                 console.log(err)
