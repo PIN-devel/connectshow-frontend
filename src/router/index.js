@@ -4,8 +4,7 @@ import Home from '@/views/Home.vue'
 import CalenderView from  '@/views/CalenderView.vue'
 
 //도연
-import SignupView from '@/views/accounts/SignupView.vue'
-import LoginView from '@/views/accounts/LoginView.vue'
+
 import UserProfileUpdateView from '@/views/accounts/UserProfileUpdateView.vue'
 import ClubIndexView from '@/views/clubs/ClubIndexView.vue'
 import ClubCreateView from '@/views/clubs/ClubCreateView.vue'
@@ -31,16 +30,6 @@ Vue.use(VueRouter)
     path: '/calender',
     name: 'CalenderView',
     component: CalenderView 
-  },
-  {
-    path: '/signup',
-    name: 'Signupview',
-    component: SignupView
-  },
-  {
-    path: '/login',
-    name: 'Loginview',
-    component: LoginView
   },
   {
     path: '/profileupdate/:ID',
@@ -91,6 +80,11 @@ Vue.use(VueRouter)
     path: '/users/:userId',
     name: 'UserDetailView',
     component: UserDetailView
+  },
+  {
+    path: '*',
+    name: 'PageNotFoundView',
+    component: PageNotFoundView
   },
 ]
 
