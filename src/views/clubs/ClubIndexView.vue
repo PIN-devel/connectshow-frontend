@@ -12,7 +12,7 @@ const BACK_URL = 'http://127.0.0.1:8000'
 
 import ClubsListitems from '@/components/clubs/ClubsListitems.vue'
 export default {
-    name:'ClubIndex',
+    name:'ClubIndexView',
     components:{
         ClubsListitems,
     },
