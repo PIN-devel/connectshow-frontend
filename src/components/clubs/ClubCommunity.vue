@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="text-right" v-if="!isMaster">
+    <div class="text-right" v-if="isMaster">
       <!-- <button class="raise" @click="createArticle">Create</button> -->
-      <button type="button" @click="createArticle" class="btn3d btn btn-default btn-lg"><span class="glyphicon glyphicon-download-alt"></span>+</button>
+      <!-- <button type="button" @click="createArticle" class="btn3d btn btn-default btn-lg"><span class="glyphicon glyphicon-download-alt"></span>+</button> -->
+      <button class="btn btn-light" @click="createArticle"><i class="fas fa-edit"></i> Article create</button>
     </div>
-    <ClubCommunityItem v-for="article in articles" :key="article.id" :article="article" :isMaster="isMaster"/>
+    <ClubCommunityItem @article-delete="articleDelete" v-for="article in articles" :key="article.id" :article="article" :isMaster="isMaster"/>
     
     <infinite-loading @infinite="infiniteHandler" spinner="waveDots"></infinite-loading>
   </div>
@@ -31,6 +32,7 @@ export default {
     return {
       articles: [],
       page: 1,
+      articlesNum: null,
     }
   },
   methods: {
@@ -39,6 +41,7 @@ export default {
       const options = {params: {_page: this.page++}}
       axios.get(BACK_URL + `/community/${club_id}/`, options)
         .then((res) => {
+          this.articlesNum = res.data.articles_num
           setTimeout(() => {
             this.articles.push(...res.data.data)
           }, 1000);
@@ -49,19 +52,28 @@ export default {
       // router push
     },
     infiniteHandler($state){
-      const club_id = this.$route.params.clubId
-      const options = {params: {_page: this.page++}}
-      axios.get(BACK_URL + `/community/${club_id}/`, options)
-        .then((res) => {
-          setTimeout(() => {
-            this.articles.push(...res.data.data)
-            $state.loaded()
-          }, 1000);
-        })
-        .catch(() => {
-          $state.complete()
-        })
+      if (parseInt(this.articlesNum / 5) >= this.page){
+        const club_id = this.$route.params.clubId
+        const options = {params: {_page: this.page++}}
+        axios.get(BACK_URL + `/community/${club_id}/`, options)
+          .then((res) => {
+            setTimeout(() => {
+              this.articles.push(...res.data.data)
+              $state.loaded()
+            }, 1000);
+          })
+          .catch((err) => {
+            console.log(err.response.data)
+          })
+      } else{
+        $state.complete()
+      }
     },
+    articleDelete(articleId){
+      this.articles = this.articles.filter(function (article){
+        return article.id !== articleId
+      })
+    }
   },
   created(){
     this.getArticles()

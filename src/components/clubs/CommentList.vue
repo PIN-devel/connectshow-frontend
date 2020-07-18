@@ -1,9 +1,9 @@
 <template>
   <div>
-    <CommentListItem class="mb-3" v-for="comment in comments" :key="comment.id" :comment="comment"/>
+    <CommentListItem class="mb-3" @comment-delete="commentDelete" v-for="comment in comments" :key="comment.id" :comment="comment"/>
     <a href="#none" v-show="pageCount" @click="getComments">댓글 더보기</a>
     <div class="d-flex cursor">
-      <input v-model="commentData.content" @keypress.enter="commentCreate" type="text" class="form-control m-3" placeholder="Write a comment"><i class="far fa-paper-plane fa-lg my-auto" :click="commentCreate"></i>
+      <input v-model="commentData.content" @keypress.enter="commentCreate" type="text" class="form-control m-3" placeholder="Write a comment"><i class="far fa-paper-plane fa-lg my-auto" @click="commentCreate"></i>
     </div>
   </div>
 </template>
@@ -39,15 +39,20 @@ export default {
   },
   methods: {
     commentCreate(){
-      if (!this.$cookies.isKey('auth-token')){
-        alert('로그인이 필요합니다')
+      if (!this.commentData.content){
+        alert('내용을 작성해주세요')
       } else{
-        axios.post(BACK_URL + `/community/${this.articleId}/comments/`, this.commentData, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
-          .then((res) => {
-            this.commentData.content = null
-            console.log(res.data)
-          })
-          .catch((err) => { console.log(err.response.data) })
+        if (!this.$cookies.isKey('auth-token')){
+          alert('로그인이 필요합니다')
+          this.commentData.content = null
+        } else{
+          axios.post(BACK_URL + `/community/${this.articleId}/comments/`, this.commentData, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+            .then((res) => {
+              this.commentData.content = null
+              this.comments.push(res.data.data)
+            })
+            .catch((err) => { console.log(err.response.data) })
+        }
       }
     },
     getComments(){
@@ -57,6 +62,11 @@ export default {
           this.comments.push(...res.data.data)
         })
         .catch((err) => { console.log(err.response.data) })
+    },
+    commentDelete(commentId){
+      this.comments = this.comments.filter(function (comment){
+        return comment.id !== commentId
+      })
     },
   },
 }

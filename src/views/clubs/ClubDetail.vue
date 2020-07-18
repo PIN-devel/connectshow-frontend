@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ClubProfile :isMaster="isMaster" :club="club"/>
+    <ClubProfile class="container m-5" :userState="userState" :isFollow="isFollow" :followNum="followNum" :isMaster="isMaster" :club="club"/>
     <div>
       <ul class="nav nav-tabs nav-justified md-tabs indigo" id="myTabJust" role="tablist">
         <li class="nav-item">
@@ -18,9 +18,9 @@
       </ul>
 
       <div class="tab-content pt-5" id="myTabContentJust">
-        <ClubDescription :isChanged="isChanged" @member-change="memberChange" :isMaster="isMaster" :club="club" class="tab-pane fade show active" id="des-just" role="tabpanel" aria-labelledby="des-tab-just"/>
-        <ClubPerformances :isMaster="isMaster" class="tab-pane fade" id="perf-just" role="tabpanel" aria-labelledby="perf-tab-just"/>
-        <ClubCommunity :isMaster="isMaster" class="tab-pane fade" id="community-just" role="tabpanel" aria-labelledby="community-tab-just"/>
+        <ClubDescription :isChanged="isChanged" @member-change="memberChange" :isMaster="isMaster" :club="club" class="tab-pane fade show active container" id="des-just" role="tabpanel" aria-labelledby="des-tab-just"/>
+        <ClubPerformances :isMaster="isMaster" class="tab-pane fade container" id="perf-just" role="tabpanel" aria-labelledby="perf-tab-just"/>
+        <ClubCommunity :isMaster="isMaster" class="tab-pane fade container" id="community-just" role="tabpanel" aria-labelledby="community-tab-just"/>
       </div>
     </div>
   </div>
@@ -50,6 +50,9 @@ export default {
       club: [],
       isMaster: false,
       isChanged: false,
+      isFollow: null,
+      followNum: null,
+      userState: null,
     }
   },
   methods: {
@@ -58,7 +61,22 @@ export default {
       axios.get(BACK_URL + `/accounts/clubs/${club_id}/`)
         .then((res) => {
           this.club = res.data.data
-          console.log(res.data.data)
+          if (this.$cookies.get("auth-token")){
+            axios.get(BACK_URL + '/accounts/', { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+              .then((res) => {
+                const userId = res.data.data.id
+                if (userId in this.club.club_members){
+                  this.userState = 3
+                } else{
+                  if (userId in this.club.club_waiting_members){
+                    this.userState = 2
+                  } else{
+                    this.userState = 1
+                  }
+                }
+              })
+              .catch((err) => { console.log(err.response.data) })
+            }
         })
         .catch(err => console.log(err.response.data))
     },
@@ -74,10 +92,20 @@ export default {
       this.getInfo()
       this.isChanged = !this.isChanged
     },
+    followCheck(){
+      const club_id = this.$route.params.clubId
+      axios.post(BACK_URL + `/accounts/clubs/${club_id}/follow/check/`, null, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+        .then((res) => {
+          this.isFollow = res.data.data.follow
+          this.followNum = res.data.data.count
+        })
+        .catch(err => console.log(err.response.data))
+    },
   },
   created(){
     this.getInfo()
     this.checkMaster()
+    this.followCheck()
   },
 }
 </script>

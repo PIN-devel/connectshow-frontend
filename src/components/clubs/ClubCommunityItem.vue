@@ -6,10 +6,10 @@
           <div class="d-flex flex-row align-items-center"><img src="https://i.imgur.com/SzqskfC.png" width="60">
             <div class="d-flex flex-column user-name-followers ml-3"><span class="font-weight-bold">{{ username }}</span><span>{{ createTime }}  <i class="fas fa-globe-americas"></i></span></div>
           </div>
-          <div><i class="fa fa-bookmark-o fa-2x text-info"></i></div>
+          <!-- <div><i class="fa fa-bookmark-o fa-2x text-info"></i></div> -->
           <div class="text-right" v-if="isMaster">
-            <a href="#none" @click="updateArticle">수정</a>
-            <a href="#none" @click="deleteArticle">삭제</a>
+            <button class="btn btn-link pr-0" @click="updateArticle">수정</button>
+            <button class="btn btn-link" @click="deleteArticle">삭제</button>
           </div>
         </div>
         <div>
@@ -76,9 +76,10 @@ export default {
       // router push
     },
     deleteArticle(){
-      axios.delete(BACK_URL + `/community/articles/${this.article.id}/`, null, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+      axios.delete(BACK_URL + `/community/articles/${this.article.id}/`, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
         .then((res) => {
           console.log(res.data)
+          this.$emit('article-delete', this.article.id)
         })
         .catch((err) => { console.log(err.response.data) })
     },
