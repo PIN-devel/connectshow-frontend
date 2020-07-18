@@ -9,14 +9,16 @@ import CalenderView from  '../views/CalenderView.vue'
 import SignupView from '../views/accounts/SignupView.vue'
 import LoginView from '../views/accounts/LoginView.vue'
 import UserProfileUpdate from '../views/accounts/UserProfileUpdate.vue'
+import ClubIndex from '../views/clubs/ClubIndex.vue'
 import ClubCreate from '../views/clubs/ClubCreate.vue'
 import ClubUpdate from '../views/clubs/ClubUpdate.vue'
 import PerformanceCreate from '../views/performances/PerformanceCreate.vue'
 import PerformanceUpdate from '../views/performances/PerformanceUpdate.vue'
+import ArticleCreate from '../views/community/ArticleCreate.vue'
+import ArticleUpdate from '../views/community/ArticleUpdate.vue'
 
 //수미
-import ClubDetail from '../views/clubs/ClubDetail.vue'
-import UserDetail from '../views/users/UserDetail.vue'
+import ClubDetail from '../views/ClubDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -47,6 +49,11 @@ Vue.use(VueRouter)
     component: UserProfileUpdate,
   },
   {
+    path: '/clubindex',
+    name: 'ClubIndex',
+    component: ClubIndex
+  },
+  {
     path: '/clubcreate',
     name: 'ClubCreate',
     component: ClubCreate
@@ -72,9 +79,14 @@ Vue.use(VueRouter)
     component: ClubDetail
   },
   {
-    path: '/users/:userId',
-    name: 'UserDetail',
-    component: UserDetail
+    path: '/clubs/:clubId/article',
+    name: 'ArticleCreate',
+    component: ArticleCreate
+  },
+  {
+    path: '/article/:articleID',
+    name: 'ArticleUpdate',
+    component: ArticleUpdate
   },
 ]
 
