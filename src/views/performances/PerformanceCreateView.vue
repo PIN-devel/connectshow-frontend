@@ -13,8 +13,8 @@
       </div>
       <!-- end_date -->
       <div class="form-group">
-        <label for="example-datepicker">종영날짜</label>
-        <b-form-datepicker id="example-datepicker" v-model="performance.end_date" class="mb-2"></b-form-datepicker>
+        <label for="example-datepicker2">종영날짜</label>
+        <b-form-datepicker id="example-datepicker2" v-model="performance.end_date" class="mb-2"></b-form-datepicker>
       </div>
       <!-- running_time -->
       <div class="form-group">
@@ -43,10 +43,10 @@
         <button @click.prevent="addNonUserName">+</button>
         <small id="titlehelper" class="form-text text-muted"></small>
       </div>
-      <!-- poster_image -->
+      <!-- poster_image v-on:change="performanceimage()" -->
       <div class="form-group">
         <label for="exampleFormControlFile1">포스터</label>
-        <b-form-file type="file" id="file" ref="file" v-on:change="performanceimage()"></b-form-file>
+        <b-form-file type="file" id="file" ref="file" v-model="performance.poster_image"></b-form-file>
       </div>
       <!-- description -->
       <div class="form-group">
@@ -124,11 +124,15 @@ export default {
       performancedata.append("end_date", this.performance.end_date);
       performancedata.append("running_time", this.performance.running_time);
       performancedata.append("time", this.performance.time);
-      //performancedata.append('poster_image',this.performance.poster_image)
-      // performancedata.append('description',this.performance.description)
+      performancedata.append("poster_image", this.performance.poster_image);
+      performancedata.append("description", this.performance.description);
       performancedata.append("url", this.performance.url);
       performancedata.append("category_id", this.performance.category_id);
       performancedata.append("club_id", this.performance.club_id);
+      performancedata.append("user_ids", this.performance.user_ids);
+      const json_arr = JSON.stringify(this.performance.non_user_names);
+      performancedata.append("non_user_names", json_arr);
+
       axios
         .post(`${BACK_URL}/performances/`, performancedata, axiosConfig)
         .then(() => {})
@@ -136,9 +140,9 @@ export default {
           console.log(err);
         });
     },
-    performanceimage() {
-      this.performance.poster_image = this.$refs.file.files[0];
-    },
+    // performanceimage() {
+    //   this.performance.poster_image = this.$refs.file.files[0];
+    // },
     addNonUserName() {
       if (this.non_user_name !== "") {
         this.performance.non_user_names.push(this.non_user_name);
