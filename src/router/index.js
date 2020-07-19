@@ -13,6 +13,7 @@ import PerformanceCreateView from '@/views/performances/PerformanceCreateView.vu
 import PerformanceUpdateView from '@/views/performances/PerformanceUpdateView.vue'
 import ArticleCreateView from '@/views/community/ArticleCreateView.vue'
 import ArticleUpdateView from '@/views/community/ArticleUpdateView.vue'
+import PageNotFoundView from '@/views/PageNotFoundView.vue'
 
 //수미
 import ClubDetailView from '@/views/clubs/ClubDetailView.vue'
