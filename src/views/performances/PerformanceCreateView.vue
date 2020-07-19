@@ -8,6 +8,18 @@
       </div>
       <!-- start_date -->
       <div class="form-group">
+        <b-form-group label="카테고리">
+          <b-form-radio v-model="performance.category_id" name="some-radios" value="1">음악/콘서트</b-form-radio>
+          <b-form-radio v-model="performance.category_id" name="some-radios" value="2">뮤지컬/오페라</b-form-radio>
+          <b-form-radio v-model="performance.category_id" name="some-radios" value="3">연극</b-form-radio>
+          <b-form-radio v-model="performance.category_id" name="some-radios" value="4">국악</b-form-radio>
+          <b-form-radio v-model="performance.category_id" name="some-radios" value="5">무용/발레</b-form-radio>
+          <b-form-radio v-model="performance.category_id" name="some-radios" value="6">아동/가족</b-form-radio>
+          <b-form-radio v-model="performance.category_id" name="some-radios" value="7">전시</b-form-radio>
+          <b-form-radio v-model="performance.category_id" name="some-radios" value="8">기타</b-form-radio>
+        </b-form-group>
+      </div>
+      <div class="form-group">
         <label for="example-datepicker">상영 시작 날짜</label>
         <b-form-datepicker id="example-datepicker" v-model="performance.start_date" class="mb-2"></b-form-datepicker>
       </div>
@@ -84,7 +96,7 @@ export default {
         poster_image: "",
         description: "",
         url: "",
-        category_id: 1,
+        category_id: 0,
         club_id: this.$route.params.clubId,
         non_user_names: [],
         user_ids: []
