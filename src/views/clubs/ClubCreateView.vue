@@ -48,7 +48,9 @@ export default {
       clubdata.append('club_name',this.clubdata.club_name)
       clubdata.append('description',this.clubdata.description)
       axios.post(`${BACK_URL}/accounts/clubs/`,clubdata,axiosConfig)
-      .then(()=>{
+      .then((response)=>{
+        this.$alert("클럽생성 완료:)")
+        this.$router.push({ name: 'ClubDetailView', params: { clubId: response.data.data.id }})
       })
       .catch((err)=>{
         console.log(err)

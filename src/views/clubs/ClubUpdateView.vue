@@ -16,7 +16,7 @@
         <small id="descriptionhelper" class="form-text text-muted">...</small>
       </div>
       <button type="submit" class="btn btn-info mr-1" @click="updateclub">수정</button>
-      <button type="submit" class="btn btn-danger" @click="deleteclub">삭제</button>
+      <!-- <button type="submit" class="btn btn-danger" @click="deleteclub">삭제</button> -->
     </form>
   </div>
 </template>
@@ -63,6 +63,10 @@ export default {
           this.description = reaponse.data.data.club_detail.description
           this.club_image = reaponse.data.data.club_detail.club_image
           this.user = reaponse.data.data.club_detail.master.username
+          console.log(this.club_name)
+          console.log(this.description)
+          console.log(this.club_image)
+          console.log(this.user)
           this.getuser()
         })
         .catch((err)=>{
@@ -70,26 +74,25 @@ export default {
         })
       },
       updateclub(event){
-        console.log(123456)
-      event.preventDefault()
-      const axiosConfig = {
-        headers:{
-          Authorization : `Token ${this.$cookies.get('auth-token')}`
-        },
-      }
-      const clubdatas = {
-        club_image : this.club_image,
-        club_name : this.club_name,
-        description : this.description
-      }
-      axios.put(`${BACK_URL}/accounts/clubs/`+this.$route.params.ID+'/',clubdatas,axiosConfig)
-      .then((response)=>{
-        console.log(response)
-        // this.$router.push({name:'ClubDetail',params:this.$route.params.ID})
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+        event.preventDefault()
+        const axiosConfig = {
+          headers:{
+            Authorization : `Token ${this.$cookies.get('auth-token')}`
+          },
+        }
+        let clubdata = new FormData()
+        clubdata.append('club_image',this.club_image)
+        clubdata.append('club_name',this.club_name)
+        clubdata.append('description',this.description)
+        console.log(clubdata)
+        axios.put(`${BACK_URL}/accounts/clubs/`+this.$route.params.ID+'/',clubdata,axiosConfig)
+        .then((response)=>{
+          this.$alert("수정완료:)")
+          this.$router.push({ name: 'ClubDetailView', params: { clubId: response.data.data.id }})
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
     },
     deleteclub(event){
       const axiosConfig = {
