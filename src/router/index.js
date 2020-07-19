@@ -4,16 +4,16 @@ import Home from "@/views/Home.vue";
 import CalenderView from "@/views/CalenderView.vue";
 
 //도연
-import SignupView from "@/views/accounts/SignupView.vue";
-import LoginView from "@/views/accounts/LoginView.vue";
-import UserProfileUpdateView from "@/views/accounts/UserProfileUpdateView.vue";
-import ClubIndexView from "@/views/clubs/ClubIndexView.vue";
-import ClubCreateView from "@/views/clubs/ClubCreateView.vue";
-import ClubUpdateView from "@/views/clubs/ClubUpdateView.vue";
-import PerformanceCreateView from "@/views/performances/PerformanceCreateView.vue";
-import PerformanceUpdateView from "@/views/performances/PerformanceUpdateView.vue";
-import ArticleCreateView from "@/views/community/ArticleCreateView.vue";
-import ArticleUpdateView from "@/views/community/ArticleUpdateView.vue";
+
+import UserProfileUpdateView from '@/views/accounts/UserProfileUpdateView.vue'
+import ClubIndexView from '@/views/clubs/ClubIndexView.vue'
+import ClubCreateView from '@/views/clubs/ClubCreateView.vue'
+import ClubUpdateView from '@/views/clubs/ClubUpdateView.vue'
+import PerformanceCreateView from '@/views/performances/PerformanceCreateView.vue'
+import PerformanceUpdateView from '@/views/performances/PerformanceUpdateView.vue'
+import ArticleCreateView from '@/views/community/ArticleCreateView.vue'
+import ArticleUpdateView from '@/views/community/ArticleUpdateView.vue'
+import PageNotFoundView from '@/views/PageNotFoundView.vue'
 
 //수미
 import ClubDetailView from "@/views/clubs/ClubDetailView.vue";
@@ -33,18 +33,8 @@ const routes = [
     component: CalenderView,
   },
   {
-    path: "/signup",
-    name: "Signupview",
-    component: SignupView,
-  },
-  {
-    path: "/login",
-    name: "Loginview",
-    component: LoginView,
-  },
-  {
-    path: "/profileupdate/:ID",
-    name: "UserProfileUpdateView",
+    path: '/profileupdate/:ID',
+    name: 'UserProfileUpdateView',
     component: UserProfileUpdateView,
   },
   {
@@ -92,7 +82,12 @@ const routes = [
     name: "UserDetailView",
     component: UserDetailView,
   },
-];
+  {
+    path: '*',
+    name: 'PageNotFoundView',
+    component: PageNotFoundView
+  },
+]
 
 const router = new VueRouter({
   mode: "history",

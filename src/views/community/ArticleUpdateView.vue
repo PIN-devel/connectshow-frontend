@@ -23,7 +23,7 @@
 import axios from 'axios'
 const BACK_URL = 'http://127.0.0.1:8000'
 export default {
-    name:"ArticleUpdate",
+    name:"ArticleUpdateView",
     data(){
       return{
         title:"",
@@ -74,14 +74,16 @@ export default {
                 Authorization : `Token ${this.$cookies.get('auth-token')}`
             },
         }
-            let data = new FormData()
-            data.append('title',this.title)
-            data.append('content',this.content)
-            data.append('image',this.image)
+            let data = {
+                title:this.title,
+                content:this.content,
+                image:this.image
+            }
+            console.log(data)
             axios.put(`${BACK_URL}/community/articles/`+this.$route.params.articleID+'/',data,axiosConfig)
             .then((response)=>{
                 console.log(response)
-            // this.$router.push({name:'ClubDetail',params:this.$route.params.ID})
+                this.$router.push({ name: 'ClubDetailView', params: { clubId: `${this.$route.params.clubId}` }})
             })
             .catch((err)=>{
                 console.log(err)

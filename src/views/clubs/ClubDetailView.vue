@@ -38,7 +38,7 @@ import axios from 'axios'
 const BACK_URL = 'http://localhost:8000'
 
 export default {
-  name: 'ClubDetail',
+  name: 'ClubDetailView',
   components: {
     ClubProfile,
     ClubDescription,

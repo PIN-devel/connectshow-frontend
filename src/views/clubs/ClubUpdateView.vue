@@ -3,7 +3,7 @@
     <form>
       <div class="form-group">
         <label for="clubname">Club name</label>
-        <input type="text" class="form-control" id="clubname" aria-describedby="clubnamehelper" v-model="clubdata.club_name">
+        <input type="text" class="form-control" id="clubname" aria-describedby="clubnamehelper" v-model="club_name">
         <small id="clubnamehelper" class="form-text text-muted">...</small>
       </div>
       <div class="form-group">
@@ -12,7 +12,7 @@
       </div>
       <div class="form-group">
         <label for="description">description</label>
-        <input type="text" class="form-control" id="description" aria-describedby="descriptionhelper" v-model="clubdata.description">
+        <input type="text" class="form-control" id="description" aria-describedby="descriptionhelper" v-model="description">
         <small id="descriptionhelper" class="form-text text-muted">...</small>
       </div>
       <button type="submit" class="btn btn-info mr-1" @click="updateclub">수정</button>
@@ -26,14 +26,12 @@ import axios from 'axios'
 const BACK_URL = 'http://127.0.0.1:8000'
 
 export default {
-    name:"ClubUpdate",
+    name:"ClubUpdateView",
     data(){
       return{
-      clubdata:{
-        club_name:null,
-        description:null,
-        club_image:null,
-      },
+      club_name:null,
+      description:null,
+      club_image:null,
       user:null,
       currentuser:null,
     }
@@ -61,9 +59,9 @@ export default {
       getclub(){ 
         axios.get(`${BACK_URL}/accounts/clubs/`+this.$route.params.ID+'/')
         .then((reaponse)=>{
-          this.clubdata.club_name = reaponse.data.data.club_detail.club_name
-          this.clubdata.description = reaponse.data.data.club_detail.description
-          this.clubdata.club_image = reaponse.data.data.club_detail.club_image
+          this.club_name = reaponse.data.data.club_detail.club_name
+          this.description = reaponse.data.data.club_detail.description
+          this.club_image = reaponse.data.data.club_detail.club_image
           this.user = reaponse.data.data.club_detail.master.username
           this.getuser()
         })
@@ -72,18 +70,19 @@ export default {
         })
       },
       updateclub(event){
+        console.log(123456)
       event.preventDefault()
       const axiosConfig = {
         headers:{
           Authorization : `Token ${this.$cookies.get('auth-token')}`
         },
       }
-      let clubdata = new FormData()
-      clubdata.append('club_image',this.clubdata.club_image)
-      clubdata.append('club_name',this.clubdata.description)
-      clubdata.append('description',this.clubdata.club_name)
-      console.log(clubdata)
-      axios.put(`${BACK_URL}/accounts/clubs/`+this.$route.params.ID+'/',clubdata,axiosConfig)
+      const clubdatas = {
+        club_image : this.club_image,
+        club_name : this.club_name,
+        description : this.description
+      }
+      axios.put(`${BACK_URL}/accounts/clubs/`+this.$route.params.ID+'/',clubdatas,axiosConfig)
       .then((response)=>{
         console.log(response)
         // this.$router.push({name:'ClubDetail',params:this.$route.params.ID})
@@ -103,8 +102,7 @@ export default {
       // this.$router.push({name:'Home'})
     }, 
     clubimage(){
-      this.clubdata.club_image = this.$refs.file.files[0]
-      console.log(this.clubdata.club_image)
+      this.club_image = this.$refs.file.files[0]
     },
   },
   created(){
