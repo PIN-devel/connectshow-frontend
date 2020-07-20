@@ -22,13 +22,13 @@
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="!isLoggedIn" to="/signup" class="nav-link">Signup</router-link>
+              <Login @submit-login-data="login" v-if="!isLoggedIn"/>
             </li>
             <li class="nav-item">
-              <router-link v-if="!isLoggedIn" to="/login" class="nav-link">Login</router-link>
+              <Signup @submit-signup-data="signup" v-if="!isLoggedIn"/>
             </li>
             <li class="nav-item">
-              <router-link v-if="flag" to="/accountsdetail" class="nav-link">{{currentuser}}님</router-link>
+              <router-link v-if="isLoggedIn" :to="{name:'UserDetailView', params:{userId:`${currentuserID}`}}" class="nav-link">{{currentuser}}님</router-link>
             </li>
             <li class="nav-item">
               <router-link
@@ -48,19 +48,26 @@
         </div>
       </nav>
     </div>
-    <router-view @submit-login-data="login" @submit-signup-data="signup" />
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 <script>
+import Login from "@/components/accounts/Login.vue"
+import Signup from "@/components/accounts/Signup.vue"
+
 import axios from "axios";
 const BACK_URL = "http://127.0.0.1:8000";
 export default {
   name: "app",
+  components:{
+    Login,
+    Signup,
+  },
   data: function() {
     return {
       isLoggedIn: false,
       currentuser: null,
-      flag: null
+      currentuserID: null,
     };
   },
   methods: {
@@ -90,8 +97,8 @@ export default {
         axios
           .get(`${BACK_URL}/rest-auth/user/`, axiosConfig)
           .then(response => {
-            this.currentuser = response.data.username;
-            this.flag = true;
+            this.currentuser = response.data.username
+            this.currentuserID = response.data.pk
           })
           .catch(err => {
             console.error(err);
@@ -102,12 +109,17 @@ export default {
       this.$cookies.set("auth-token", key);
     },
     signup: function(signupData) {
+      const loginData = {
+        username:signupData.username,
+        password:signupData.password1
+      }
       axios
         .post(`${BACK_URL}/rest-auth/signup/`, signupData)
         .then(response => {
           console.log(response);
           this.inputcategory(response.data.key, signupData.categoryData);
-          this.$router.push("/login");
+          this.$alert("회원가입 완료! 자동 로그인 됩니다.");
+          this.login(loginData)
         })
         .catch(err => {
           console.log(err);
@@ -122,7 +134,6 @@ export default {
           this.$session.start();
           this.$session.set("jwt", response.data.key);
           this.isLoggedIn = true;
-          this.flag = true;
           this.$router.push("/");
           this.showuser();
         })
@@ -143,7 +154,6 @@ export default {
           this.$cookies.remove("auth-token");
           this.$session.destroy();
           this.isLoggedIn = false;
-          this.flag = false;
           this.$router.push("/");
         })
         .catch(err => {
@@ -157,7 +167,6 @@ export default {
       this.showuser();
     } else {
       this.isLoggedIn = false;
-      this.flag = false;
     }
   }
 };
