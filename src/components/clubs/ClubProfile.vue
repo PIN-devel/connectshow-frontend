@@ -70,7 +70,7 @@ export default {
         .catch(err => console.log(err.response.data))
     },
     updateClub(){
-      this.$router.push({ name: 'ClubUpdate', params:{'Id':this.club.club_detail.id} })
+      this.$router.push({ name: 'ClubUpdateView', params:{'ID':this.club.club_detail.id} })
     },
     deleteClub(){
       axios.delete(BACK_URL + `/accounts/clubs/${this.club.club_detail.id}/`, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
