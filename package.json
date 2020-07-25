@@ -12,6 +12,7 @@
     "bootstrap-vue": "^2.15.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-confirm-dialog": "^1.0.2",
     "vue-cookies": "^1.7.2",
     "vue-infinite-loading": "^2.4.5",
     "vue-rate-it": "^2.1.0",

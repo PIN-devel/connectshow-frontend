@@ -13,6 +13,13 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import wysiwyg from "vue-wysiwyg";
+
+//수미
+import VueConfirmDialog from 'vue-confirm-dialog'
+
+Vue.use(VueConfirmDialog)
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
+
 Vue.use(wysiwyg, {}); // config is optional. more below
 
 Vue.use(BootstrapVue)

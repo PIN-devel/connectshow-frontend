@@ -1,13 +1,17 @@
 <template>
-  <div class="text-left m-5">
-    <div class="my-4">
+  <div class="text-left my-5 px-5">
+    <div>
       <h3>Follow club</h3>
       <hr class="short-hr">
-      <div v-for="club in userFollow" :key="club.id">
-				<div class="card border-0 profile text-center hovereffect">
-          <div @click="moveToClubPage(club.id)">
-            <img class="card-img" src="https://i.imgur.com/At1IG6H.png" alt="profile_image">
-            <span>{{ club.club_name }}</span>
+      <br>
+      <p class="text-center mt-2" v-if="!userFollow.length">No results :(</p>
+      <div class="d-flex">
+        <div class="col-lg-2 col-md-3 col-4 border-0 m-2 text-center" v-for="club in userFollow" :key="club.id">
+          <div class="d-flex flex-column">
+            <div class="m-auto" @click="moveToClubPage(club.id)">
+              <ProfileImage :profileImage="club.club_image"/>
+              <span>{{ club.club_name }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -17,14 +21,19 @@
 </template>
 
 <script>
+import ProfileImage from '@/components/ProfileImage.vue'
+
 export default {
   name: 'UserFollow',
+  components: {
+    ProfileImage,
+  },
   props: {
-    userFollow: Object,
+    userFollow: Array,
 	},
 	methods: {
 		moveToClubPage(clubId){
-			this.$router.push({ name: 'ClubDetail', params: { 'clubId': clubId } })
+			this.$router.push({ name: 'ClubDetailView', params: { 'clubId': clubId } })
 		}
 	}
 }
