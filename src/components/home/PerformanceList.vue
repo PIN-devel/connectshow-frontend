@@ -2,13 +2,14 @@
     <div class="container">
       
       <div class="row">
-          <PerformanceListItem v-for="performance in performances" :key="performance.id" :performance="performance"/>
+          <PerformanceListItem v-for="performance in performances" 
+            :key="performance.id" :performance="performance"/>
         </div>
     </div>
 </template>
 
 <script>
-import PerformanceListItem from '@/components/PerformanceListItem.vue'
+import PerformanceListItem from '@/components/home/PerformanceListItem.vue'
 
 export default {
     name: 'PerformanceList',

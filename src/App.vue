@@ -2,9 +2,6 @@
   <div id="app" class="m-0">
     <div id="nav" class="m-0 p-0 mb-5">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <router-link to="/" class="navbar-brand">
-          <img src="@/assets/logo.png" alt style="height: 90px" />
-        </router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -42,7 +39,7 @@
               <router-link to="/clubcreate" class="nav-link">clubcreate</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/calender" class="nav-link">Calender</router-link>
+              <router-link to="/calendar" class="nav-link">Calendar</router-link>
             </li>
           </ul>
         </div>
@@ -174,7 +171,8 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Jua', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
