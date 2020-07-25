@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
     <h1 class="title">회원정보수정</h1>
     <hr>
   <span v-for="category in categories" :key="category">
@@ -64,13 +64,22 @@ export default {
         this.$alert(" 로그인을 해주세요")
       }
     },
+    getcurrentuser(){
+      axios.get(`${BACK_URL}/rest-auth/user/`,this.config)
+        .then((reaponse)=>{
+          console.log(reaponse)
+        if (Number(reaponse.data.pk) !== Number(this.$route.params.ID)){
+            this.$alert("잘 못 된 접근입니다.");
+            this.$router.push({name:'Home'})
+        }  
+        })
+        .catch((err)=>{
+          console.error(err)
+        })
+    },
     getuser(){
       axios.get(`${BACK_URL}/accounts/`+this.$route.params.ID+'/',this.config)
         .then((reaponse)=>{
-          this.user_id = reaponse.data.data.id
-          if (Number(this.user_id) !== Number(this.$route.params.ID)){
-            this.$alert("잘못 된 접근입니다.")
-          }
           this.getcategory()
           this.email = reaponse.data.data.email
           this.profile_image = reaponse.data.data.profile_image
@@ -113,6 +122,7 @@ export default {
   },
   created(){
     this.getconfig()
+    this.getcurrentuser()
     this.checklogin()
     this.getuser()
   },

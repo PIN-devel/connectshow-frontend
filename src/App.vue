@@ -134,7 +134,7 @@ export default {
           this.$session.start();
           this.$session.set("jwt", response.data.key);
           this.isLoggedIn = true;
-          this.$router.push("/");
+          // this.$router.push("/");
           this.showuser();
         })
         .catch(err => {
