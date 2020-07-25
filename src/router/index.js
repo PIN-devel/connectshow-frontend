@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
-import CalenderView from  '@/views/CalenderView.vue'
+import CalendarView from  '@/views/calendar/CalendarView.vue'
 
 //도연
 import SignupView from '@/views/accounts/SignupView.vue'
@@ -28,9 +28,9 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/calender',
-    name: 'CalenderView',
-    component: CalenderView 
+    path: '/calendar',
+    name: 'CalendarView',
+    component: CalendarView
   },
   {
     path: '/signup',

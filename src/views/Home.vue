@@ -11,9 +11,9 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios'
-import RecommendList from '@/components/RecommendList.vue'
-import Categories from '@/components/Categories.vue'
-import PerformanceList from '@/components/PerformanceList.vue'
+import RecommendList from '@/components/home/RecommendList.vue'
+import Categories from '@/components/home/Categories.vue'
+import PerformanceList from '@/components/home/PerformanceList.vue'
 
 const SERVER_URL = 'http://localhost:8000'
 
@@ -29,7 +29,7 @@ export default {
     PerformanceList,
     Categories,
     RecommendList,
-  },
+  }, 
   methods: {
     fetchPerformances() {
         axios.get(SERVER_URL + '/performances/')
@@ -46,7 +46,7 @@ export default {
           this.performances = res.data.data
             })
         .catch(err => console.log(err))
-          this.category = id
+        this.category = id
       },
   },
   created() {
