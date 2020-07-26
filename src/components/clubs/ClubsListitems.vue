@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
-    {{club.master.username}}
-    {{club.club_name}}
-		<img :src="clubThumbnailImage" alt="">
-    {{club.created_at}}
-  </div>
+  <tr @click="goClubDetail" class="cursor_test">
+    <th scope="row"><b-avatar :src="clubThumbnailImage" size="5rem"></b-avatar></th>
+    <td class="align-middle"> {{club.club_name}}</td>
+    <td class="align-middle">{{club.description}}</td>
+    <td class="align-middle">{{club.master.username}}</td>
+  </tr>
 </template>
 
 <script>
@@ -20,9 +20,16 @@ export default {
             return BACK_URL+this.club.club_image
         }
     },
+    methods:{
+      goClubDetail(){
+        this.$router.push({ name: 'ClubDetailView', params: { clubId: this.club.id }})
+      },
+    }
 }
 </script>
 
 <style>
-
+.cursor_test {
+  cursor: pointer;
+  }
 </style>
