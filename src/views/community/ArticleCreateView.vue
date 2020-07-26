@@ -66,8 +66,7 @@ export default {
         checklogin(){
             if (!(this.$session.get('jwt'))){
                 this.$alert(" 로그인을 해주세요")
-                this.$router.push('/login')
-
+                this.$router.push({name:'Home'})                
             }
         },
 
@@ -99,7 +98,7 @@ export default {
         },
     },
     created(){
-        this.checklogin
+        this.checklogin()
     },
     computed:{
         showuser(){

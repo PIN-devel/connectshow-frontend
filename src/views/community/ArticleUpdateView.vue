@@ -66,6 +66,12 @@ export default {
         }
     },
     methods:{
+        checklogin(){
+            if (!(this.$session.get('jwt'))){
+                this.$alert(" 로그인을 해주세요")
+                this.$router.push({name:'Home'})                
+            }
+        },
         getuser(){
             const axiosConfig = {
                 headers:{
@@ -77,7 +83,7 @@ export default {
                 this.currentuser = reaponse.data.username
                 if (this.user !== this.currentuser){
                     this.$alert("잘 못 된 접근입니다.");
-                    // this.$router.push({name:'Home'})
+                    this.$router.push({name:'Home'})
                 }  
                 })
                 .catch((err)=>{
@@ -150,6 +156,7 @@ export default {
     },
     created(){
         this.getArticle()
+        this.checklogin()
     },
 }
 </script>
