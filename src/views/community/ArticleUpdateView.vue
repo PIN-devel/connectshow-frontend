@@ -62,6 +62,7 @@ export default {
         content:"",
         currentuser:"",
         user:"",
+        clubid:"",
         }
     },
     methods:{
@@ -91,6 +92,8 @@ export default {
                 this.show_image = BACK_URL+reaponse.data.data.image
                 this.content = reaponse.data.data.content
                 this.user = reaponse.data.data.user.username
+                this.clubid = reaponse.data.data.club
+                console.log(reaponse)
                 this.getuser()
             })
             .catch((err)=>{
@@ -105,16 +108,16 @@ export default {
                 Authorization : `Token ${this.$cookies.get('auth-token')}`
             },
         }
-            let data = {
-                title:this.title,
-                content:this.content,
-                image:this.image
+          const formData = new FormData()
+            formData.append('title',this.title)
+            formData.append('content',this.content)
+            if (this.$refs.file.files[0]!==undefined){
+              formData.append('image',this.image)
             }
-            console.log(data)
-            axios.put(`${BACK_URL}/community/articles/`+this.$route.params.articleID+'/',data,axiosConfig)
+            axios.put(`${BACK_URL}/community/articles/`+this.$route.params.articleID+'/',formData,axiosConfig)
             .then((response)=>{
                 console.log(response)
-                this.$router.push({ name: 'ClubDetailView', params: { clubId: `${this.$route.params.clubId}` }})
+                this.$router.push({ name: 'ClubDetailView', params: { clubId: this.clubid }})
             })
             .catch((err)=>{
                 console.log(err)
@@ -131,7 +134,7 @@ export default {
             axios.delete(`${BACK_URL}/community/articles/`+this.$route.params.articleID+'/',axiosConfig)
             .then((response)=>{
                 console.log(response)
-            // this.$router.push({name:'Home'})
+            this.$router.push({name:'Home'})
             })
             .catch((err)=>{
                 console.log(err)
