@@ -2,9 +2,6 @@
   <div id="app" class="m-0">
     <div id="nav" class="m-0 p-0 mb-5">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <router-link to="/" class="navbar-brand">
-          <img src="@/assets/logo.png" alt style="height: 90px" />
-        </router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -22,13 +19,13 @@
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="!isLoggedIn" to="/signup" class="nav-link">Signup</router-link>
+              <Login @submit-login-data="login" v-if="!isLoggedIn"/>
             </li>
             <li class="nav-item">
-              <router-link v-if="!isLoggedIn" to="/login" class="nav-link">Login</router-link>
+              <Signup @submit-signup-data="signup" v-if="!isLoggedIn"/>
             </li>
             <li class="nav-item">
-              <router-link v-if="flag" to="/accountsdetail" class="nav-link">{{currentuser}}님</router-link>
+              <router-link v-if="isLoggedIn" :to="{name:'UserDetailView', params:{userId:`${currentuserID}`}}" class="nav-link">{{currentuser}}님</router-link>
             </li>
             <li class="nav-item">
               <router-link
@@ -42,26 +39,34 @@
               <router-link to="/clubcreate" class="nav-link">clubcreate</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/calender" class="nav-link">Calender</router-link>
+              <router-link to="/calendar" class="nav-link">Calendar</router-link>
             </li>
           </ul>
         </div>
       </nav>
     </div>
-    <router-view @submit-login-data="login" @submit-signup-data="signup" />
+    <router-view @submit-login-data="login" @submit-signup-data="signup" :key="$route.fullPath"/>
     <vue-confirm-dialog class="dialog"></vue-confirm-dialog>
+
   </div>
 </template>
 <script>
+import Login from "@/components/accounts/Login.vue"
+import Signup from "@/components/accounts/Signup.vue"
+
 import axios from "axios";
 const BACK_URL = "http://127.0.0.1:8000";
 export default {
   name: "app",
+  components:{
+    Login,
+    Signup,
+  },
   data: function() {
     return {
       isLoggedIn: false,
       currentuser: null,
-      flag: null
+      currentuserID: null,
     };
   },
   methods: {
@@ -91,8 +96,8 @@ export default {
         axios
           .get(`${BACK_URL}/rest-auth/user/`, axiosConfig)
           .then(response => {
-            this.currentuser = response.data.username;
-            this.flag = true;
+            this.currentuser = response.data.username
+            this.currentuserID = response.data.pk
           })
           .catch(err => {
             console.error(err);
@@ -103,12 +108,17 @@ export default {
       this.$cookies.set("auth-token", key);
     },
     signup: function(signupData) {
+      const loginData = {
+        username:signupData.username,
+        password:signupData.password1
+      }
       axios
         .post(`${BACK_URL}/rest-auth/signup/`, signupData)
         .then(response => {
           console.log(response);
           this.inputcategory(response.data.key, signupData.categoryData);
-          this.$router.push("/login");
+          this.$alert("회원가입 완료! 자동 로그인 됩니다.");
+          this.login(loginData)
         })
         .catch(err => {
           console.log(err);
@@ -123,8 +133,7 @@ export default {
           this.$session.start();
           this.$session.set("jwt", response.data.key);
           this.isLoggedIn = true;
-          this.flag = true;
-          this.$router.push("/");
+          // this.$router.push("/");
           this.showuser();
         })
         .catch(err => {
@@ -144,7 +153,6 @@ export default {
           this.$cookies.remove("auth-token");
           this.$session.destroy();
           this.isLoggedIn = false;
-          this.flag = false;
           this.$router.push("/");
         })
         .catch(err => {
@@ -158,7 +166,6 @@ export default {
       this.showuser();
     } else {
       this.isLoggedIn = false;
-      this.flag = false;
     }
   }
 };
@@ -166,7 +173,8 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Jua', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

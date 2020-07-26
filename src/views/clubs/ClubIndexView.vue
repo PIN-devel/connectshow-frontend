@@ -1,8 +1,20 @@
 <template>
-<div>
-    <div v-for="club in Clubs" :key="club.name">
-        <ClubsListitems :club="club"/>
-    </div>
+<div class="container">
+    <h1>Club List</h1>
+    <ClubSearch @search-clubs="searchClubs"/>
+    <table class="table table-hover mt-3">
+        <thead>
+            <tr>
+            <th scope="col">club image</th>
+            <th scope="col">club name</th>
+            <th scope="col">club description</th>
+            <th scope="col">club master</th>
+            </tr>
+        </thead>
+        <tbody v-for="club in Clubs" :key="club.name">
+            <ClubsListitems :club="club"/>
+        </tbody>
+    </table>
 </div>
 </template>
 
@@ -10,16 +22,18 @@
 import axios from 'axios'
 const BACK_URL = 'http://127.0.0.1:8000'
 
+import ClubSearch from '@/components/clubs/ClubSearch.vue'
 import ClubsListitems from '@/components/clubs/ClubsListitems.vue'
 
 export default {
     name:'ClubIndexView',
     components:{
         ClubsListitems,
+        ClubSearch
     },
     data(){
         return{
-            Clubs:[]
+            Clubs:[],
         }
     },
     methods:{
@@ -36,7 +50,23 @@ export default {
             .catch((err)=>{
                 console.error(err)
             }) 
-        }
+        },
+            searchClubs(keyword) {
+                    const axiosConfig = {
+                        headers:{
+                        Authorization : `Token ${this.$cookies.get('auth-token')}`
+                        },
+                    }
+            axios.get(`${BACK_URL}/accounts/clubs/`,axiosConfig)
+                .then(response => {
+                    console.log(response)
+                const resultclubs = response.data.data.filter(data => data.club_name.includes(keyword))
+                this.Clubs = resultclubs
+                })
+            .catch((err)=>{
+                console.error(err)
+            })             
+            },
     },
     created(){
         this.getClubs()
