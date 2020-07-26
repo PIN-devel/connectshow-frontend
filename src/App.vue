@@ -45,7 +45,9 @@
         </div>
       </nav>
     </div>
-    <router-view :key="$route.fullPath"/>
+    <router-view @submit-login-data="login" @submit-signup-data="signup" :key="$route.fullPath"/>
+    <vue-confirm-dialog class="dialog"></vue-confirm-dialog>
+
   </div>
 </template>
 <script>
@@ -190,5 +192,15 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.dialog .vc-btn {
+  color: white;
+  background-color: #42b983;
+}
+
+.dialog .left {
+  color: #42b983;
+  background-color: white;
 }
 </style>

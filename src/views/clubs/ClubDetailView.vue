@@ -1,24 +1,24 @@
 <template>
   <div>
-    <ClubProfile class="container m-5" :userState="userState" :isFollow="isFollow" :followNum="followNum" :isMaster="isMaster" :club="club"/>
+    <ClubProfile class="container m-5" @member-change="memberChange" :userState="userState" :isFollow="isFollow" :followNum="followNum" :isMaster="isMaster" :club="club"/>
     <div>
       <ul class="nav nav-tabs nav-justified md-tabs indigo" id="myTabJust" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="des-tab-just" data-toggle="tab" href="#des-just" role="tab" aria-controls="des-just"
-            aria-selected="true">소개</a>
+            aria-selected="true">INFO</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="perf-tab-just" data-toggle="tab" href="#perf-just" role="tab" aria-controls="perf-just"
-            aria-selected="false">작품</a>
+            aria-selected="false">PERFORMANCE</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="community-tab-just" data-toggle="tab" href="#community-just" role="tab" aria-controls="community-just"
-            aria-selected="false">커뮤니티</a>
+            aria-selected="false">COMMUNITY</a>
         </li>
       </ul>
 
-      <div class="tab-content pt-5" id="myTabContentJust">
-        <ClubDescription :isChanged="isChanged" @member-change="memberChange" :isMaster="isMaster" :club="club" class="tab-pane fade show active container" id="des-just" role="tabpanel" aria-labelledby="des-tab-just"/>
+      <div class="tab-content p-5" id="myTabContentJust">
+        <ClubDescription @member-change="memberChange" :isMaster="isMaster" :club="club" class="tab-pane fade show active container" id="des-just" role="tabpanel" aria-labelledby="des-tab-just"/>
         <ClubPerformances :isMaster="isMaster" class="tab-pane fade container" id="perf-just" role="tabpanel" aria-labelledby="perf-tab-just"/>
         <ClubCommunity :isMaster="isMaster" class="tab-pane fade container" id="community-just" role="tabpanel" aria-labelledby="community-tab-just"/>
       </div>
@@ -49,7 +49,7 @@ export default {
     return {
       club: [],
       isMaster: false,
-      isChanged: false,
+      // isChanged: false,
       isFollow: null,
       followNum: null,
       userState: null,
@@ -65,10 +65,14 @@ export default {
             axios.get(BACK_URL + '/accounts/', { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
               .then((res) => {
                 const userId = res.data.data.id
-                if (userId in this.club.club_members){
+                if (this.club.club_members.find(member => {
+                  return member.id === userId
+                })){
                   this.userState = 3
                 } else{
-                  if (userId in this.club.club_waiting_members){
+                  if (this.club.club_waiting_members.find(member => {
+                    return member.id === userId
+                  })){
                     this.userState = 2
                   } else{
                     this.userState = 1
@@ -78,7 +82,7 @@ export default {
               .catch((err) => { console.log(err.response.data) })
             }
         })
-        .catch(err => console.log(err.response.data))
+        .catch(() => this.$router.push({ name: 'Home' }))
     },
     checkMaster(){
       const club_id = this.$route.params.clubId
@@ -90,8 +94,32 @@ export default {
     },
     memberChange(){
       this.getInfo()
-      this.isChanged = !this.isChanged
     },
+    // memberIn(member){
+    //   console.log('승인', member)
+    //   this.club.club_members.push(...member)
+    //   console.log(this.club.club_members)
+    // },
+    // memberOut(memberId){
+    //   console.log('거부', memberId)
+    //   if (this.club.club_members.find(member => {
+    //     return member.id === memberId
+    //   })){
+    //     for (var i=0; i<this.club.club_members; i++){
+    //       if (this.club.club_members[i].id === memberId){
+    //         delete this.club.club_members[i]
+    //         console.log(this.club.club_members)
+    //       }
+    //     }
+    //   } else{
+    //     for (var j=0; j<this.club.club_members; j++){
+    //       if (this.club.club_waiting_members[j].id === memberId){
+    //         delete this.club.club_waiting_members[j]
+    //         console.log(this.club.club_waiting_members)
+    //       }
+    //     }
+    //   }
+    // },
     followCheck(){
       const club_id = this.$route.params.clubId
       axios.post(BACK_URL + `/accounts/clubs/${club_id}/follow/check/`, null, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})

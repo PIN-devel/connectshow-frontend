@@ -73,14 +73,16 @@ const routes = [
     component: ArticleCreateView,
   },
   {
-    path: "/article/:articleID",
-    name: "ArticleUpdateView",
-    component: ArticleUpdateView,
+
+    path: '/article/:articleId',
+    name: 'ArticleUpdateView',
+    component: ArticleUpdateView
   },
   {
     path: "/users/:userId",
     name: "UserDetailView",
     component: UserDetailView,
+
   },
   {
     path: '*',

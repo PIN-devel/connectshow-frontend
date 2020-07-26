@@ -1,16 +1,21 @@
 <template>
   <div class="row">
-    <img class="profile-comment col-2 img-fluid" src="https://i.imgur.com/At1IG6H.png" alt="">
-    <div class="comment col-10">
-      <div class="d-flex flex-row justify-content-between">
-        <h5>{{ comment.user.username }}</h5>
-        <div v-if="isAuthor">
+    <div class="col-2 pr-0 my-auto">
+      <b-avatar variant="secondary" :src="profileImage" size="3.5rem"></b-avatar>
+    </div>
+    <div class="col-10 pl-2">
+      <div class="d-flex flex-wrap justify-content-between">
+        <div class="d-flex">
+          <h6 class="my-auto font-weight-bold">{{ comment.user.username }}</h6>
+          <pre class="my-auto"> {{ comment.content }}</pre>
+        </div>
+        <div v-if="isAuth" class="ml-auto">
           <button class="btn btn-link" @click="deleteComment">삭제</button>
         </div>
       </div>
-      <p class="">{{ comment.content }}</p>
+      <span class="text-secondary">{{ updateTime }}</span>
+      <!-- <hr> -->
     </div>
-    
   </div>
 </template>
 
@@ -26,25 +31,46 @@ export default {
   },
   data(){
     return {
-      isAuthor: null,
+      isAuth: null,
     }
+  },
+  computed: {
+    profileImage(){
+      return BACK_URL + this.comment.user.profile_image
+    },
+    updateTime(){
+      return this.comment.updated_at.slice(0,10)
+    },
   },
   methods: {
     deleteComment(){
-      axios.delete(BACK_URL + `/community/comments/${this.comment.id}/`, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
-        .then(() => {
-          this.$emit('comment-delete', this.comment.id)
-        })
-        .catch((err) => { console.log(err.response.data) })
+      this.$confirm(
+        {
+          message: `삭제하시겠습니까?`,
+          button: {
+            yes: 'Yes',
+            no: 'No',
+          },
+          callback: confirm => {
+            if (confirm) {
+              axios.delete(BACK_URL + `/community/comments/${this.comment.id}/`, { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+                .then(() => {
+                  this.$emit('comment-delete', this.comment.id)
+                })
+                .catch((err) => { console.log(err.response.data) })
+            }
+          }
+        }
+      )
     },
     checkAuth(){
       if (this.$cookies.get("auth-token")){
         axios.get(BACK_URL + '/accounts/', { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
           .then((res) => {
             if (res.data.data.id === this.comment.user.id){
-              this.isAuthor = true
+              this.isAuth = true
             } else{
-              this.isAuthor = false
+              this.isAuth = false
             }
               })
           .catch((err) => { console.log(err.response.data) })
