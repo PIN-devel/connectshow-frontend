@@ -1,24 +1,47 @@
 <template>
   <div class="container">
     <form>
-      <div class="form-group">
-        <label for="clubname">Club name</label>
-        <input type="text" class="form-control" id="clubname" aria-describedby="clubnamehelper" v-model="club_name">
-        <small id="clubnamehelper" class="form-text text-muted">...</small>
+        <h1 class="d-flex">Club create</h1>
+        <hr>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+              <div class="text-center">
+                <div class="form-group">
+                    <!-- <img v-if="!flag" class="profile" :src="show_image" alt="profile_image"> -->
+                    <b-avatar v-if="!flag" :src="show_image" size="10rem"></b-avatar>
+                    <!-- <img v-if="flag" class="profile" :src="change_image" alt="profile_image"> -->
+                    <b-avatar  v-if="flag" :src="change_image" size="10rem"></b-avatar>
+                    <br>
+                    <hr>
+                    <h6 class="d-flex">club image</h6>
+                    <input type="file" id="file" ref="file" @change="clubimage()"/>
+                </div>
+              </div>
+            </div>
+            <!-- right column -->
+            <div class="col-md-7">
+              <h3 class="d-flex">Club info</h3>
+              <hr>
+              <br>
+              <div role="form">
+                <div class="form-group d-flex flex-row">
+                  <label class="col-lg-3 control-label">club name</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" id="club_name" v-model="club_name">
+                  </div>
+                </div>
+                <div class="form-group d-flex flex-row">
+                  <label class="col-lg-3 control-label">description</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" id="club_description" v-model="description">
+                  </div>
+                </div>
+            </div>
+          </div>
       </div>
-      <div class="form-group">
-          <label for="exampleFormControlFile1">club_image</label>
-          <input type="file" id="file" ref="file" @change="clubimage()"/>
-          <img v-if="!flag" class="profile" :src="show_image" alt="profile_image">
-          <img v-if="flag" class="profile" :src="img_url" alt="profile_image">
-      </div>
-      <div class="form-group">
-        <label for="description">description</label>
-        <input type="text" class="form-control" id="description" aria-describedby="descriptionhelper" v-model="description">
-        <small id="descriptionhelper" class="form-text text-muted">...</small>
-      </div>
-      <button type="submit" class="btn btn-info mr-1" @click="updateclub">수정</button>
-      <!-- <button type="submit" class="btn btn-danger" @click="deleteclub">삭제</button> -->
+      <hr>
+      <button type="submit" class="btn btn-primary d-flex flex-row ml-auto" @click="updateclub">Submit</button>
     </form>
   </div>
 </template>
@@ -32,7 +55,7 @@ export default {
     data(){
       return{
       flag:false,
-      img_url:null,
+      change_image:null,
       show_image:null,
       club_name:null,
       description:null,
@@ -109,7 +132,7 @@ export default {
     }, 
     clubimage(){
       this.club_image = this.$refs.file.files[0]
-      this.img_url = URL.createObjectURL(this.club_image)
+      this.change_image = URL.createObjectURL(this.club_image)
       this.flag = true
     },
   },
