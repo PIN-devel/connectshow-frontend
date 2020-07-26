@@ -36,7 +36,7 @@
               >Logout</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/clubcreate" class="nav-link">clubcreate</router-link>
+              <router-link to="/clubindex" class="nav-link">clubs</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/calendar" class="nav-link">Calendar</router-link>
