@@ -11,8 +11,8 @@
       <h3>Members</h3>
       <hr class="short-hr">
       <br>
-      <div class="d-flex">
-        <div class="col-lg-2 col-md-3 col-4 border-0 m-2 text-center" v-for="member in club.club_members" :key="member.id">
+      <div class="d-flex flex-wrap">
+        <div class="border-0 m-3 text-center" v-for="member in club.club_members" :key="member.id">
           <div class="d-flex flex-column">
             <div class="m-auto" @click="moveToDetail(member.id)">
               <ProfileImage :profileImage="member.profile_image"/>
@@ -31,8 +31,8 @@
       <h3>Waiting list</h3>
       <hr class="short-hr">
       <br>
-      <div class="d-flex">
-        <div class="col-lg-2 col-md-3 col-4 border-0 m-2 text-center" v-for="member in club.club_waiting_members" :key="member.id">
+      <div class="d-flex flex-wrap">
+        <div class="border-0 m-3 text-center" v-for="member in club.club_waiting_members" :key="member.id">
           <div class="d-flex flex-column">
             <div class="m-auto" @click="moveToDetail(member.id)">
               <ProfileImage :profileImage="member.profile_image"/>

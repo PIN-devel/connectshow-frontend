@@ -4,12 +4,12 @@
       <b-avatar variant="secondary" :src="profileImage" size="3.5rem"></b-avatar>
     </div>
     <div class="col-10 pl-2">
-      <div class="d-flex flex-row justify-content-between">
+      <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex">
           <h6 class="my-auto font-weight-bold">{{ comment.user.username }}</h6>
           <pre class="my-auto"> {{ comment.content }}</pre>
         </div>
-        <div v-if="isAuth">
+        <div v-if="isAuth" class="ml-auto">
           <button class="btn btn-link" @click="deleteComment">삭제</button>
         </div>
       </div>

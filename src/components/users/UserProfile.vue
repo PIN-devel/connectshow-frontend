@@ -1,13 +1,18 @@
 <template>
   <div class="row my-5">
-    <div class="col-lg-2 col-md-3 col-4 box">
+    <div class="col-lg-2 col-md-3 col-4">
       <ProfileImage :profileImage="user.profile_image"/>
     </div>
-    <div class="col-10 text-left my-auto">
-      <h3>{{ user.username }}</h3>
+    <div class="col-lg-10 col-md-9 col-8 text-left my-auto">
+      <div class="d-flex">
+        <h3>{{ user.username }}</h3>
+        <i v-if="isAuth" @click="updateUser" class="fas fa-edit mx-2"></i>
+        <!-- <i v-if="isAuth" @click="deleteUser" class="far fa-trash-alt"></i> -->
+      </div>
       <h6>{{ user.email }}</h6>
-      <button v-if="isAuth" @click="updateUser" class="btn btn-light"><i class="fas fa-edit"></i> 회원정보 수정</button>
-      <button v-if="isAuth" @click="deleteUser" class="btn btn-dark m-2"><i class="far fa-trash-alt"></i> 회원 탈퇴</button>
+
+      <b-badge variant="info" class="mr-2" v-for="category in user.like_categories" :key="category.id"># {{ category.name }}</b-badge>
+      
     </div>
   </div>
 </template>
@@ -26,26 +31,9 @@ export default {
   },
   props: {
     user: Object,
-  },
-  data(){
-    return {
-      isAuth: null,
-    }
+    isAuth: Boolean,
   },
   methods: {
-    checkAuth(){
-      if (this.$cookies.get("auth-token")){
-        axios.get(BACK_URL + '/accounts/', { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
-          .then((res) => {
-            if (res.data.data.id === this.user.id){
-              this.isAuth = true
-            } else{
-              this.isAuth = false
-            }
-              })
-          .catch((err) => { console.log(err.response.data) })
-        }
-    },
     updateUser(){
       this.$router.push({ name: 'UserProfileUpdateView', params:{'ID':this.user.id} })
     },
@@ -70,11 +58,11 @@ export default {
       )
     },
   },
-  mounted(){
-    this.checkAuth()
-  },
 }
 </script>
 
 <style>
+.fa-edit {
+  cursor: pointer;
+}
 </style>

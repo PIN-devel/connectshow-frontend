@@ -1,27 +1,9 @@
 <template>
   <div>
-    <UserProfile :user="user" class="container m-5"/>
-    <div>
-      <ul class="nav nav-tabs nav-justified md-tabs indigo" id="myTabJust" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="des-tab-just" data-toggle="tab" href="#des-just" role="tab" aria-controls="des-just"
-            aria-selected="true">MY ACTIVITY</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="perf-tab-just" data-toggle="tab" href="#perf-just" role="tab" aria-controls="perf-just"
-            aria-selected="false">LIKE PERFORMANCE</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="community-tab-just" data-toggle="tab" href="#community-just" role="tab" aria-controls="community-just"
-            aria-selected="false">FOLLOW CLUB</a>
-        </li>
-      </ul>
-
-      <div class="tab-content p-5" id="myTabContentJust">
-        <UserActivity :user="user" class="tab-pane fade show active container" id="des-just" role="tabpanel" aria-labelledby="des-tab-just"/>
-        <UserLikeList :userLike="user.like_performances" class="tab-pane fade container" id="perf-just" role="tabpanel" aria-labelledby="perf-tab-just"/>
-        <UserFollowList :userFollow="user.follow_clubs" class="tab-pane fade container" id="community-just" role="tabpanel" aria-labelledby="community-tab-just"/>
-      </div>
+    <UserProfile :user="user" :isAuth="isAuth" class="container m-5"/>
+    <div class="mx-5">
+      <hr>
+      <UserActivity :user="user"/>
     </div>
   </div>
 </template>
@@ -30,8 +12,6 @@
 // @ is an alias to /src
 import UserProfile from '@/components/users/UserProfile.vue'
 import UserActivity from '@/components/users/UserActivity.vue'
-import UserLikeList from '@/components/users/UserLikeList.vue'
-import UserFollowList from '@/components/users/UserFollowList.vue'
 
 import axios from 'axios'
 
@@ -42,12 +22,11 @@ export default {
   components: {
 		UserProfile,
 		UserActivity,
-		UserLikeList,
-    UserFollowList,
   },
   data(){
     return {
       user: null,
+      isAuth: null,
     }
   },
   methods: {
@@ -55,7 +34,18 @@ export default {
       const user_id = this.$route.params.userId
       axios.get(BACK_URL + `/accounts/${user_id}/`)
         .then((res) => {
-					this.user = res.data.data
+          this.user = res.data.data
+          if (this.$cookies.get("auth-token")){
+            axios.get(BACK_URL + '/accounts/', { headers: { Authorization: `Token ${this.$cookies.get("auth-token")}` }})
+              .then((res) => {
+                if (res.data.data.id === this.user.id){
+                  this.isAuth = true
+                } else{
+                  this.isAuth = false
+                }
+              })
+              .catch((err) => { console.log(err.response.data) })
+              }
 					})
 				.catch((err) => { console.log(err.response.data) })
     },
@@ -65,3 +55,5 @@ export default {
   },
 }
 </script>
+<style>
+</style>
