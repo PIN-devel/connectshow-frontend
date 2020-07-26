@@ -86,7 +86,7 @@ export default {
         },
 
         getArticle(){ 
-            axios.get(`${BACK_URL}/community/articles/`+this.$route.params.articleID+'/')
+            axios.get(`${BACK_URL}/community/articles/`+this.$route.params.articleId+'/')
             .then((reaponse)=>{
                 this.title = reaponse.data.data.title
                 this.show_image = BACK_URL+reaponse.data.data.image
@@ -114,7 +114,7 @@ export default {
             if (this.$refs.file.files[0]!==undefined){
               formData.append('image',this.image)
             }
-            axios.put(`${BACK_URL}/community/articles/`+this.$route.params.articleID+'/',formData,axiosConfig)
+            axios.put(`${BACK_URL}/community/articles/`+this.$route.params.articleId+'/',formData,axiosConfig)
             .then((response)=>{
                 console.log(response)
                 this.$router.push({ name: 'ClubDetailView', params: { clubId: this.clubid }})
@@ -131,7 +131,7 @@ export default {
                 },
             }
             event.preventDefault()
-            axios.delete(`${BACK_URL}/community/articles/`+this.$route.params.articleID+'/',axiosConfig)
+            axios.delete(`${BACK_URL}/community/articles/`+this.$route.params.articleId+'/',axiosConfig)
             .then((response)=>{
                 console.log(response)
             this.$router.push({name:'Home'})
