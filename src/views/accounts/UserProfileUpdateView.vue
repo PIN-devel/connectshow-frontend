@@ -72,7 +72,10 @@
           </button>
       </div>
       <hr>
-      <button type="submit" class="btn btn-primary d-flex flex-row ml-auto" @click="img_email_update">회원정보 수정</button>
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary mr-2" @click="img_email_update">회원정보 수정</button>
+        <button type="button" class="btn btn-danger" @click="deleteUser">회원탈퇴</button>
+      </div>
     </form>
   </div>
 </div>
@@ -177,7 +180,27 @@ export default {
       .catch((err)=>{
           console.log(err)
       })
-    }
+    },
+    deleteUser(){
+      this.$confirm(
+        {
+          message: `탈퇴하시겠습니까?`,
+          button: {
+            yes: 'Yes',
+            no: 'No',
+          },
+          callback: confirm => {
+            if (confirm) {
+              axios.delete(BACK_URL + `/accounts/${this.user_id}/`, this.config)
+                .then(() => {
+                  this.$router.push({ name: 'Home' })
+                })
+                .catch(err => console.log(err.response.data))
+            }
+          }
+        }
+      )
+    },
   },
   created(){
     this.getconfig()
