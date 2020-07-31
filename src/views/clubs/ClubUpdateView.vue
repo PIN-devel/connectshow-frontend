@@ -65,6 +65,12 @@ export default {
     }
   },
     methods:{
+      checklogin(){
+        if (!(this.$session.get('jwt'))){
+          this.$alert(" 로그인을 해주세요")
+          this.$router.push({name:'Home'})
+        }
+      },
       getuser(){
         const axiosConfig = {
           headers:{
@@ -137,12 +143,13 @@ export default {
     },
   },
   created(){
-    this.getclub()
+    this.getclub(),
+    this.checklogin()
   },
-  watch:{
-    show_image(){},
-    img_url(){}
-  }
+  // watch:{
+  //   show_image(){},
+  //   img_url(){}
+  // }
 }
 </script>
 

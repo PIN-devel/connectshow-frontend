@@ -65,6 +65,12 @@ export default {
       }
     },
     methods:{
+      checklogin(){
+        if (!(this.$session.get('jwt'))){
+          this.$alert(" 로그인을 해주세요")
+          this.$router.push({ name: 'ClubIndexView'})
+        }
+      },
       createclub(event){
       event.preventDefault()
       const axiosConfig = {
@@ -90,6 +96,9 @@ export default {
       this.change_image = URL.createObjectURL(this.clubdata.club_image)
       this.flag = true
     },
+  },
+  created(){
+    this.checklogin()
   }
 }
 </script>
