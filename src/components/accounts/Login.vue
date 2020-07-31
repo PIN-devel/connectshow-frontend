@@ -4,10 +4,10 @@
     
     <b-modal id="bv-modal-Login" class="" hide-footer>
       <template v-slot:modal-title>
-        <h1>Sign in</h1>
+        <h1 class="account-modal">Sign in</h1>
       </template>
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-      <div class="d-block text-center">
+      <div class="d-block text-center account-modal">
         <form class="center m-0">
         <div class="input-group mt-5 mb-3">
             <div class="input-group-append">
@@ -62,6 +62,11 @@ export default {
 </script>
 
 <style>
+.account-modal{
+  font-family: 'Jua', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .profile-img-card {
     width: 96px;

@@ -4,10 +4,10 @@
 
     <b-modal size="lg" id="bv-modal-Signup" hide-footer>
       <template v-slot:modal-title>
-        <h1>Sign up</h1>
+        <h1 class="account-modal">Sign up</h1>
       </template>
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-      <div class="d-block text-center">
+      <div class="d-block text-center account-modal">
         <form class="center container m-0">
           <div class="input-group mt-4 mb-4">
               <div class="input-group-append">
