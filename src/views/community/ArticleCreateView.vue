@@ -29,10 +29,10 @@
                 <div class="text-center">
                     <div class="form-group">
                         <!-- <img v-if="!flag" class="profile" :src="show_image" alt="profile_image"> -->
-                        <img v-if="!flag" src="'http://127.0.0.1:8000media/images/article_default_image.png'" class="img-fluid" alt="Responsive image">
+                        <h6 v-if="!flag" class="d-flex">이미지가 없습니다.</h6>
+                        <img v-if="!flag" :src="showuser" class="img-fluid" alt="Responsive image">
                         <!-- <img v-if="flag" class="profile" :src="change_image" alt="profile_image"> -->
                         <img v-if="flag" :src="change_image" class="img-fluid" alt="Responsive image">
-                        <br>
                         <hr>
                         <h6 class="d-flex">article image</h6>
                         <input type="file" id="file" ref="file" @change="articleImage()"/>
@@ -56,7 +56,6 @@ export default {
     data(){
         return{
             flag:false,
-            show_image:'',
             change_image:'',
             title:"",
             image:"",
@@ -67,8 +66,7 @@ export default {
         checklogin(){
             if (!(this.$session.get('jwt'))){
                 this.$alert(" 로그인을 해주세요")
-                this.$router.push('/login')
-
+                this.$router.push({name:'Home'})                
             }
         },
 
@@ -100,8 +98,13 @@ export default {
         },
     },
     created(){
-        this.checklogin
-    }
+        this.checklogin()
+    },
+    computed:{
+        showuser(){
+            return BACK_URL+'/media/images/article_default_image.png'
+        }
+    },
 }
 </script>
 

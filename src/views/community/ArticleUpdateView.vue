@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <form>
-            <h1 class="d-flex">Article create</h1>
+            <h1 class="d-flex">Article edit</h1>
             <hr>
             <div class="row">
                 <!-- right column -->
@@ -41,8 +41,8 @@
                 </div>
         </div>
         <hr>
-        <button type="submit" class="btn btn-primary" @click="updateArticle">수정</button>
-        <button type="submit" class="btn btn-primary" @click="deleteArticle">삭제</button>        
+        <button type="submit" class="btn btn-primary mr-3" @click="updateArticle">수정</button>
+        <button type="submit" class="btn btn-danger" @click="deleteArticle">삭제</button>        
         </form>
     </div>
 </template>
@@ -66,6 +66,12 @@ export default {
         }
     },
     methods:{
+        checklogin(){
+            if (!(this.$session.get('jwt'))){
+                this.$alert(" 로그인을 해주세요")
+                this.$router.push({name:'Home'})                
+            }
+        },
         getuser(){
             const axiosConfig = {
                 headers:{
@@ -77,7 +83,7 @@ export default {
                 this.currentuser = reaponse.data.username
                 if (this.user !== this.currentuser){
                     this.$alert("잘 못 된 접근입니다.");
-                    // this.$router.push({name:'Home'})
+                    this.$router.push({name:'Home'})
                 }  
                 })
                 .catch((err)=>{
@@ -93,7 +99,7 @@ export default {
                 this.content = reaponse.data.data.content
                 this.user = reaponse.data.data.user.username
                 this.clubid = reaponse.data.data.club
-                console.log(reaponse)
+                console.log(this.clubid)
                 this.getuser()
             })
             .catch((err)=>{
@@ -115,8 +121,8 @@ export default {
               formData.append('image',this.image)
             }
             axios.put(`${BACK_URL}/community/articles/`+this.$route.params.articleId+'/',formData,axiosConfig)
-            .then((response)=>{
-                console.log(response)
+            .then(()=>{
+                console.log()
                 this.$router.push({ name: 'ClubDetailView', params: { clubId: this.clubid }})
             })
             .catch((err)=>{
@@ -134,7 +140,8 @@ export default {
             axios.delete(`${BACK_URL}/community/articles/`+this.$route.params.articleId+'/',axiosConfig)
             .then((response)=>{
                 console.log(response)
-            this.$router.push({name:'Home'})
+                this.$router.push({ name: 'ClubDetailView', params: { clubId: this.clubid }})
+                this.$alert('삭제 완료')
             })
             .catch((err)=>{
                 console.log(err)
@@ -149,6 +156,7 @@ export default {
     },
     created(){
         this.getArticle()
+        this.checklogin()
     },
 }
 </script>
