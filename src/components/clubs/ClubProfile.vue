@@ -1,7 +1,7 @@
 <template>
   <div class="row my-5">
     <div class="col-lg-2 col-md-3 col-4 box">
-      <ProfileImage :profileImage="club.club_detail.club_image"/>
+      <b-avatar variant="secondary" :src="'http://127.0.0.1:8000'+club.club_detail.club_image" size="8rem"></b-avatar>
       <!-- <img class="profile" :src="profileImage" alt="profile_image"> -->
     </div>
     <div class="col-10 text-left my-auto">
@@ -23,15 +23,10 @@
 <script>
 import axios from 'axios'
 
-import ProfileImage from '@/components/ProfileImage.vue'
-
 const BACK_URL = 'http://localhost:8000'
 
 export default {
   name: 'ClubProfile',
-  components: {
-    ProfileImage
-  },
   props: {
     club: Object,
     isMaster: Boolean,

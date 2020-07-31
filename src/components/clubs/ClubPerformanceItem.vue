@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-3 col-md-5 col-11 text-center mx-3">
+  <div class="col-lg-3 col-md-6 col-12 text-center">
     <div class="card mb-2 p-0 shadow-sm" data-toggle="modal" :data-target="'#performance-'+performance.id">
       <div class="perf-img">
         <img :class="{'over-date': overDate}" class="card-img-top" :src="posterImg" alt="poster" width="100%" height="225">

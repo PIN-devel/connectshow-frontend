@@ -5,7 +5,7 @@
     </div>
     <p class="text-center mt-2" v-if="!performances.length">No results :(</p>
     <div class="container">
-      <div class="my-5 row d-flex justify-content-center">
+      <div class="my-5 row d-flex">
         <ClubPerformanceItem v-for="performance in performances" :key="`performance-${performance.id}`" :performance="performance"/>
       </div>
     </div>

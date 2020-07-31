@@ -1,18 +1,16 @@
 <template>
   <div class="row">
-    <div class="col-2 pr-0 my-auto">
+    <div class="col-2 pr-0">
       <b-avatar variant="secondary" :src="profileImage" size="3.5rem"></b-avatar>
     </div>
-    <div class="col-10 pl-2">
+    <div class="col-10 pl-2 comments">
       <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex">
-          <h6 class="my-auto font-weight-bold">{{ comment.user.username }}</h6>
-          <pre class="my-auto"> {{ comment.content }}</pre>
-        </div>
+        <h6 class="my-auto font-weight-bold mr-2">{{ comment.user.username }}</h6>
         <div v-if="isAuth" class="ml-auto">
           <button class="btn btn-link" @click="deleteComment">삭제</button>
         </div>
       </div>
+      <p >{{ comment.content }}</p>
       <span class="text-secondary">{{ updateTime }}</span>
       <!-- <hr> -->
     </div>
@@ -84,5 +82,10 @@ export default {
 </script>
 
 <style>
-
+.comments {
+  /* word-wrap: break-word;
+  white-space: -moz-pre-wrap;
+  white-space: pre-line; */
+  word-break:break-all;
+}
 </style>
