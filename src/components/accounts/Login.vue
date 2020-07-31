@@ -1,30 +1,29 @@
 <template>
   <div>
-    <a class="nav-link" id="show-btn" @click="$bvModal.show('bv-modal-Login')">Sign in</a>
+    <a class="nav-link cursor_test" id="show-btn" @click="$bvModal.show('bv-modal-Login')">Sign in</a>
     
     <b-modal id="bv-modal-Login" class="" hide-footer>
       <template v-slot:modal-title>
-        <h1>Sign in</h1>
+        <h1 class="account-modal">Sign in</h1>
       </template>
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-      <div class="d-block text-center">
+      <div class="d-block text-center account-modal">
         <form class="center m-0">
-						<div class="input-group mt-5 mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
-							<input type="text" name="" class="form-control input_user" value="" placeholder="username" v-model="username">
-						</div>
-						<div class="input-group mb-5">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-							<input type="password" name="" class="form-control input_pass" value="" placeholder="password" v-model="password" @keypress.enter="login">
-						</div>
+        <div class="input-group mt-5 mb-3">
+            <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" name="" class="form-control input_user" value="" placeholder="username" v-model="username">
+        </div>
+        <div class="input-group mb-5">
+            <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="password" name="" class="form-control input_pass" value="" placeholder="password" v-model="password" @keypress.enter="login">
+        </div>
             <hr>
           <b-button type="submit" block class="btn btn-lg btn-primary btn-block btn-signin" @click="login">login</b-button>
           <div class="bg-light rounded-lg">
-              <!-- <p class="mt-3 font-weight-bold">Don't have an account?</p> -->
               <span class="forgot-password font-weight-bold" @click="$bvModal.hide('bv-modal-Login')">
                 <Signup/>
               </span>
@@ -63,6 +62,11 @@ export default {
 </script>
 
 <style>
+.account-modal{
+  font-family: 'Jua', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .profile-img-card {
     width: 96px;

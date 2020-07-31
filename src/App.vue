@@ -28,12 +28,11 @@
               <router-link v-if="isLoggedIn" :to="{name:'UserDetailView', params:{userId:`${currentuserID}`}}" class="nav-link">{{currentuser}}님</router-link>
             </li>
             <li class="nav-item">
-              <router-link
+              <a
                 v-if="isLoggedIn"
-                to="/logout"
-                @click.native="logout"
-                class="nav-link"
-              >Logout</router-link>
+                @click="logout"
+                class="nav-link cursor_test"
+              >Logout</a>
             </li>
             <li class="nav-item">
               <router-link to="/clubcreate" class="nav-link">clubcreate</router-link>
@@ -154,6 +153,7 @@ export default {
           this.$session.destroy();
           this.isLoggedIn = false;
           this.$router.push("/");
+          this.$alert("로그아웃 완료!");
         })
         .catch(err => {
           console.log(err);

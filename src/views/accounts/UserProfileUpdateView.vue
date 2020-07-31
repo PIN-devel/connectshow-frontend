@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="container">
+  <div class="container" style="height: 20rem;">
     <form>
         <h1 class="d-flex">Edit Profile</h1>
         <hr>
@@ -35,14 +35,6 @@
                     <PasswordUpdate class="ml-auto"/>
                   </div>
                 </div>
-
-                <!-- <div class="form-group d-flex flex-row">
-                  <label class="col-lg-3 control-label">비밀번호</label>
-                  <div class="col-lg-8">
-                    <PasswordUpdate/>
-                  </div>
-                </div> -->
-
                 <div class="form-group d-flex flex-row">
                   <label class="col-lg-3 control-label">email</label>
                   <div class="col-lg-8">
@@ -50,10 +42,16 @@
                   </div>
                 </div>
                 
-                <div class="form-group d-flex flex-row">
+                <div class="form-group d-flex flex-row m-0 p-0">
                   <label class="col-lg-3 control-label">관심장르</label>
                     <div class="col-lg-8 container">
-                        <div class="d-flex justify-content-center">
+                    </div>
+                </div>
+
+                <div class="form-group d-flex flex-row m-0 p-0">
+                  <label class="col-lg-3 control-label"></label>
+                    <div class="col-lg-8 container m-0 p-0">
+                        <div class="d-flex justify-content-start">
                           <div v-for="category in categories" :key="category" class="m-2">
                               <h4><span class="badge badge-secondary">{{category}}</span></h4>
                           </div>
@@ -65,11 +63,16 @@
                           </div>
                     </div>
                 </div>
+                <div class="form-group d-flex flex-row">
+                  <label class="col-lg-3 control-label"></label>
+                  <div class="col-lg-8 d-flex flex-row">
+                  <button class="btn btn-outline-primary ml-auto" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    관심장르변경
+                  </button>                  
+                  </div>
+                </div>
             </div>
           </div>
-          <button class="btn btn-outline-primary d-flex flex-row-reverse align-self-end" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            관심장르변경
-          </button>
       </div>
       <hr>
       <div class="d-flex justify-content-end">

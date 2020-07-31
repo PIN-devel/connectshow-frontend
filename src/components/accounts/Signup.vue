@@ -1,14 +1,14 @@
 <template>
   <div>
-    <a class="nav-link" id="show-btn" @click="$bvModal.show('bv-modal-Signup')">Sign up</a>
+    <a class="nav-link cursor_test" id="show-btn" @click="$bvModal.show('bv-modal-Signup')">Sign up</a>
 
-    <b-modal id="bv-modal-Signup" class="w-50" hide-footer>
+    <b-modal size="lg" id="bv-modal-Signup" hide-footer>
       <template v-slot:modal-title>
-        <h1>Sign up</h1>
+        <h1 class="account-modal">Sign up</h1>
       </template>
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-      <div class="d-block text-center">
-        <form class="center  m-0">
+      <div class="d-block text-center account-modal">
+        <form class="center container m-0">
           <div class="input-group mt-4 mb-4">
               <div class="input-group-append">
                   <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -45,19 +45,17 @@
             <b-form-checkbox-group buttons button-variant="info" size="sm" v-model="signupData.categoryData">
                 <b-form-checkbox class="category-button" :value="3" @click="inputCategory">연극</b-form-checkbox>
             </b-form-checkbox-group>
-            </b-form-group>
-            <b-form-group>
-            <b-form-checkbox-group buttons button-variant="info" size="sm" v-model="signupData.categoryData">
+             <b-form-checkbox-group buttons button-variant="info" size="sm" v-model="signupData.categoryData">
                 <b-form-checkbox class="category-button" :value="4" @click="inputCategory">국악</b-form-checkbox>
             </b-form-checkbox-group>
+            </b-form-group>
+            <b-form-group>
             <b-form-checkbox-group buttons button-variant="info" size="sm" v-model="signupData.categoryData">
                 <b-form-checkbox class="category-button" :value="5" @click="inputCategory">무용/발레</b-form-checkbox>
             </b-form-checkbox-group>
             <b-form-checkbox-group buttons button-variant="info" size="sm" v-model="signupData.categoryData">
                 <b-form-checkbox class="category-button" :value="6" @click="inputCategory">아동/가족</b-form-checkbox>
             </b-form-checkbox-group>
-            </b-form-group>
-            <b-form-group>
             <b-form-checkbox-group buttons button-variant="info" size="sm" v-model="signupData.categoryData">
                 <b-form-checkbox class="category-button" :value="7" @click="inputCategory">전시</b-form-checkbox>
             </b-form-checkbox-group>
