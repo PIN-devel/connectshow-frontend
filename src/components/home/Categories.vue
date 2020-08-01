@@ -1,14 +1,14 @@
 <template>
-  <div class="d-flex justify-content-center">
-        <div class="buttons">
-            <button class="btn-hover color-9" @click="sendCategory(1)">음악/콘서트</button>
-            <button class="btn-hover color-9" @click="sendCategory(2)">뮤지컬/오페라</button>
-            <button class="btn-hover color-9" @click="sendCategory(3)">연극</button>
-            <button class="btn-hover color-9" @click="sendCategory(4)">국악</button>
-            <button class="btn-hover color-9" @click="sendCategory(5)">무용/발레</button>
-            <button class="btn-hover color-9" @click="sendCategory(6)">아동/가족</button>
-            <button class="btn-hover color-9" @click="sendCategory(7)">전시</button>
-            <button class="btn-hover color-9" @click="sendCategory(8)">기타</button>
+  <div class="container">
+        <div class="row buttons d-flex justify-content-center">
+            <button class="col-3 btn-hover color-9" @click="sendCategory(1)">음악/콘서트</button>
+            <button class="col-3 btn-hover color-9" @click="sendCategory(2)">뮤지컬/오페라</button>
+            <button class="col-3 btn-hover color-9" @click="sendCategory(3)">연극</button>
+            <button class="col-3 btn-hover color-9" @click="sendCategory(4)">국악</button>    
+            <button class="col-3 btn-hover color-9" @click="sendCategory(5)">무용/발레</button>
+            <button class="col-3 btn-hover color-9" @click="sendCategory(6)">아동/가족</button>
+            <button class="col-3 btn-hover color-9" @click="sendCategory(7)">전시</button>
+            <button class="col-3 btn-hover color-9" @click="sendCategory(8)">기타</button>
         </div>
   </div>
 </template>
@@ -50,7 +50,9 @@ box-sizing: border-box;
 }
 
 .buttons {
-    margin: 10%;
+    /* margin: 10%; */
+    margin-left: 50px;
+    margin-right: 50px;
     text-align: center;
 }
 
