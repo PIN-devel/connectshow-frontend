@@ -26,7 +26,7 @@
           </div>
           <!-- <hr> -->
         </div>
-        <CommentList class="mr-3" v-show="showComments" :comments="comments" :commentsNum="commentsNum" :articleId="article.id"/>
+        <CommentList class="mx-3" v-show="showComments" :comments="comments" :commentsNum="commentsNum" :articleId="article.id"/>
       </div>
     </div>
   </div>

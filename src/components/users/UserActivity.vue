@@ -24,7 +24,7 @@
 
     <div class="col-md-6">
       <div class="clubs row no-gutters border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="w-100 p-4 position-static text-left">
+        <div class="w-100 p-3 position-static text-left">
           <strong class="d-inline-block mb-3 text-success">Follow club</strong>
           <div class="d-flex flex-wrap row px-3">
             <div class="p-0 border-0 text-center py-2 col-lg-3 col-md-6 col-sm-4 col-6" v-for="club in user.follow_clubs" :key="club.id">
