@@ -91,7 +91,7 @@ export default {
 
 <style>
 .clubs {
-  max-height: 230px;
+  max-height: 210px;
 }
 .perfs-max-h {
   max-height: 365px;

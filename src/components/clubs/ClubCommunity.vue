@@ -50,7 +50,7 @@ export default {
       this.$router.push({ name: 'ArticleCreateView' })
     },
     infiniteHandler($state){
-      if (parseInt(this.articlesNum / 5) >= this.page){
+      if (parseInt(this.articlesNum / 5) + 1 >= this.page){
         const club_id = this.$route.params.clubId
         const options = {params: {_page: this.page++}}
         axios.get(BACK_URL + `/community/${club_id}/`, options)

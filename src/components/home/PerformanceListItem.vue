@@ -55,8 +55,7 @@ export default {
     cursor: pointer;
 }
 .img-hover-zoom:hover img {
-    transform: scale(1.5);
-    opacity: 0.4;   
+    transform: scale(1.5); 
 }
 .img-hover-zoom div {
     visibility: hidden;

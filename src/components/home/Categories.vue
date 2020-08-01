@@ -1,14 +1,14 @@
 <template>
   <div class="container">
         <div class="row buttons d-flex justify-content-center">
-            <button class="col-3 btn-hover color-9" @click="sendCategory(1)">음악/콘서트</button>
-            <button class="col-3 btn-hover color-9" @click="sendCategory(2)">뮤지컬/오페라</button>
-            <button class="col-3 btn-hover color-9" @click="sendCategory(3)">연극</button>
-            <button class="col-3 btn-hover color-9" @click="sendCategory(4)">국악</button>    
-            <button class="col-3 btn-hover color-9" @click="sendCategory(5)">무용/발레</button>
-            <button class="col-3 btn-hover color-9" @click="sendCategory(6)">아동/가족</button>
-            <button class="col-3 btn-hover color-9" @click="sendCategory(7)">전시</button>
-            <button class="col-3 btn-hover color-9" @click="sendCategory(8)">기타</button>
+            <button class="col-3 btn-hover color-2" @click="sendCategory(1)">음악/콘서트</button>
+            <button class="col-3 btn-hover color-2" @click="sendCategory(2)">뮤지컬/오페라</button>
+            <button class="col-3 btn-hover color-2" @click="sendCategory(3)">연극</button>
+            <button class="col-3 btn-hover color-2" @click="sendCategory(4)">국악</button>    
+            <button class="col-3 btn-hover color-2" @click="sendCategory(5)">무용/발레</button>
+            <button class="col-3 btn-hover color-2" @click="sendCategory(6)">아동/가족</button>
+            <button class="col-3 btn-hover color-2" @click="sendCategory(7)">전시</button>
+            <button class="col-3 btn-hover color-2" @click="sendCategory(8)">기타</button>
         </div>
   </div>
 </template>
@@ -57,18 +57,18 @@ box-sizing: border-box;
 }
 
 .btn-hover {
-    width: 150px;
-    font-size: 16px;
+    width: 75px;
+    font-size: 20px;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
     margin: 10px;
-    height: 35px;
+    height: 50px;
     text-align:center;
     border: none;
     background-size: 300% 100%;
 
-    border-radius: 50px;
+    border-radius: 20px;
     /* moz-transition: all .4s ease-in-out; */
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;

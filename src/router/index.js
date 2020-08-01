@@ -28,6 +28,11 @@ const routes = [
     component: Home,
   },
   {
+    path: "/logout",
+    name: "Home",
+    component: Home,
+  },
+  {
     path: '/calendar',
     name: 'CalendarView',
     component: CalendarView

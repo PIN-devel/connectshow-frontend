@@ -1,9 +1,11 @@
 <template>
-  <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+<div>
+  <footer id="sticky-footer" class="bg-dark text-white-50 fixed-bottom">
     <div class="container text-center">
       <small>Copyright &copy; Connect Show</small>
     </div>
   </footer>
+</div>
 </template>
 
 <script>
@@ -14,6 +16,9 @@ export default {
 
 <style scoped>
 #sticky-footer {
-  flex-shrink: none;
+  /* flex-shrink: none; */
+  bottom: 0;
+  opacity: 0.5;
 }
+
 </style>

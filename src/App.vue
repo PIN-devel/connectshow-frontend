@@ -1,7 +1,8 @@
 <template>
+<div>
   <div id="app" class="m-0">
     <div id="nav" class="p-0 mb-5">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
           <router-link to="/" class="navbar-brand">Connect Show</router-link>
           <button
@@ -21,6 +22,12 @@
                 <router-link to="/" class="nav-link">Home</router-link>
               </li>
               <li class="nav-item">
+                <router-link to="/clubindex" class="nav-link">Clubs</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/calendar" class="nav-link">Calendar</router-link>
+              </li>
+              <li class="nav-item">
                 <Login @submit-login-data="login" v-if="!isLoggedIn"/>
               </li>
               <li class="nav-item">
@@ -37,12 +44,7 @@
                   class="nav-link"
                 >Logout</router-link>
               </li>
-              <li class="nav-item">
-                <router-link to="/clubindex" class="nav-link">Clubs</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/calendar" class="nav-link">Calendar</router-link>
-              </li>
+              
             </ul>
           </div>
         </div>
@@ -50,8 +52,11 @@
     </div>
     <router-view @submit-login-data="login" @submit-signup-data="signup" :key="$route.fullPath"/>
     <vue-confirm-dialog class="dialog"></vue-confirm-dialog>
-    <Footer />
+    <div id="place"></div>
   </div>
+  <Footer />
+</div>
+  
 </template>
 <script>
 import Login from "@/components/accounts/Login.vue"
@@ -185,11 +190,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100% !important;
+  height: 100vh;
   
 }
 html, body {
-  height: 100% !important;
+  height: 100vh;
 }
 
 #nav {
@@ -216,4 +221,13 @@ html, body {
   color: #42b983;
   background-color: white;
 }
+
+#place {
+  height: 72px;
+}
+
+.main-color-1 {
+
+}
+
 </style>

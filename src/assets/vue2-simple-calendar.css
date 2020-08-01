@@ -88,8 +88,10 @@
     text-overflow: ellipsis;
     margin: 0 4px 2px 0;
     color: rgba(0, 0, 0, 0.87);
-    background-color: #d4dcec;
+    /* background-color: #FF8A3E; */
+    border: 1px solid #FF8A3E;
     border-radius: 25px;
+    color:  #FF8A3E;
 
   }
   .events .more-link {

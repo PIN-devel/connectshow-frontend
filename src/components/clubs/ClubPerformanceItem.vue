@@ -2,7 +2,7 @@
   <div class="col-lg-3 col-md-6 col-12 text-center">
     <div class="card mb-2 p-0 shadow-sm" data-toggle="modal" :data-target="'#performance-'+performance.id">
       <div class="perf-img">
-        <img :class="{'over-date': overDate}" class="card-img-top" :src="posterImg" alt="poster" width="100%" height="225">
+        <img :class="{'over-date': overDate}" class="card-img-top w-100" :src="posterImg" alt="poster" width="100%" height="225">
         <div class="card-img-overlay d-flex justify-content-center align-items-center">
           <h5 class="card-title text-white" v-if="overDate" style="font-size:2rem">상영종료</h5>
         </div>
