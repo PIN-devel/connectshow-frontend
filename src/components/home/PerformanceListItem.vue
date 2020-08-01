@@ -1,17 +1,15 @@
 <template>
-      <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" :src="performanceImg" alt="poster" width="100%" height="225">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button class="btn btn-primary" data-toggle="modal" :data-target="'#performance-'+performance.id">modal</button>
-                  </div>
-                </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 card-deck">
+          <div class="card border-0 m-3 text-center img-hover-zoom" style="width: 18rem;"
+            data-toggle="modal" :data-target="'#performance-'+performance.id">
+              <img :src="performanceImg" 
+                  class="mw-100 poster-img" alt="Movie Poster">
+              <div class="card-img-overlay">
+                  <p class="text-white">{{ performanceTitle }}</p>
               </div>
-              <PerformanceDetail :performanceId="performance.id"/> 
-            </div>
-        </div>
+          </div>
+          <PerformanceDetail :performanceId="performance.id"/> 
+      </div>
 </template>
 
 <script>
@@ -38,5 +36,33 @@ export default {
 </script>
 
 <style>
+.poster-img {
+    object-fit: cover;
+    height: 360px;
+}
 
+.img-hover-zoom {
+    height: 300px;
+    overflow: hidden;
+    background-color:rgb(31, 31, 31) !important;
+  }
+  
+.img-hover-zoom img {
+    transition: transform .5s ease;
+}
+
+.img-hover-zoom:hover{
+    cursor: pointer;
+}
+.img-hover-zoom:hover img {
+    transform: scale(1.5);
+    opacity: 0.4;   
+}
+.img-hover-zoom div {
+    visibility: hidden;
+}
+.img-hover-zoom:hover div {
+    visibility: visible;
+    font-size: 30px;
+}
 </style>

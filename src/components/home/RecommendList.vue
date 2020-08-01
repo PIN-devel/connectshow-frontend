@@ -7,10 +7,7 @@
         :dragging-distance="70">
         <vueper-slide v-for="i in 9" :key="i" :title="i.toString()"/>
       </vueper-slides>
-      <div class="album py-5 bg-light">
-      <div class="container">
-      </div>
-    </div>
+
   </div>
 </template>
 

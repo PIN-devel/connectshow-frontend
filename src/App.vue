@@ -1,58 +1,62 @@
 <template>
   <div id="app" class="m-0">
-    <div id="nav" class="m-0 p-0 mb-5">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <router-link to="/" class="nav-link">Home</router-link>
-            </li>
-            <li class="nav-item">
-              <Login @submit-login-data="login" v-if="!isLoggedIn"/>
-            </li>
-            <li class="nav-item">
-              <Signup @submit-signup-data="signup" v-if="!isLoggedIn"/>
-            </li>
-            <li class="nav-item">
-              <router-link v-if="isLoggedIn" :to="{name:'UserDetailView', params:{userId:`${currentuserID}`}}" class="nav-link">{{currentuser}}님</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link
-                v-if="isLoggedIn"
-                to="/logout"
-                @click.native="logout"
-                class="nav-link"
-              >Logout</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/clubcreate" class="nav-link">clubcreate</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/calendar" class="nav-link">Calendar</router-link>
-            </li>
-          </ul>
+    <div id="nav" class="p-0 mb-5">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+        <div class="container">
+          <router-link to="/" class="navbar-brand">Connect Show</router-link>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <router-link to="/" class="nav-link">Home</router-link>
+              </li>
+              <li class="nav-item">
+                <Login @submit-login-data="login" v-if="!isLoggedIn"/>
+              </li>
+              <li class="nav-item">
+                <Signup @submit-signup-data="signup" v-if="!isLoggedIn"/>
+              </li>
+              <li class="nav-item">
+                <router-link v-if="isLoggedIn" :to="{name:'UserDetailView', params:{userId:`${currentuserID}`}}" class="nav-link">{{currentuser}}님</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link
+                  v-if="isLoggedIn"
+                  to="/logout"
+                  @click.native="logout"
+                  class="nav-link"
+                >Logout</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/clubcreate" class="nav-link">clubcreate</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/calendar" class="nav-link">Calendar</router-link>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </div>
     <router-view @submit-login-data="login" @submit-signup-data="signup" :key="$route.fullPath"/>
     <vue-confirm-dialog class="dialog"></vue-confirm-dialog>
-
+    <Footer />
   </div>
 </template>
 <script>
 import Login from "@/components/accounts/Login.vue"
 import Signup from "@/components/accounts/Signup.vue"
+import Footer from "@/components/home/Footer.vue"
 
 import axios from "axios";
 const BACK_URL = "http://127.0.0.1:8000";
@@ -61,6 +65,7 @@ export default {
   components:{
     Login,
     Signup,
+    Footer,
   },
   data: function() {
     return {
@@ -179,19 +184,26 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100% !important;
+  
+}
+html, body {
+  height: 100% !important;
 }
 
 #nav {
   padding: 30px;
+  margin-bottom: 70px;
+
 }
 
 #nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  /* font-weight: bold;
+  color: #2c3e50; */
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  /* color: #42b983; */
 }
 
 .dialog .vc-btn {

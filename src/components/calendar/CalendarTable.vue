@@ -13,9 +13,16 @@
                         <tbody>
                             <tr v-for="selectedPerformance in selectedPerformances" 
                                 :key="selectedPerformance.id">
-                                <td class="text-left performance-title">{{ selectedPerformance.title }}</td>
+                                <td class="text-left performance-title"
+                                    data-toggle="modal" :data-target="'#performance-'+selectedPerformance.id">
+                                    {{ selectedPerformance.title }}</td>
                                 <td>{{ selectedPerformance.start_date }} ~ {{ selectedPerformance.end_date }}</td>
-                                <td>{{ selectedPerformance.clubs[0].club_name }}</td>
+                                <td @click="moveToClubPage(selectedPerformance.clubs[0].id)" class="performance-title">
+                                    {{ selectedPerformance.clubs[0].club_name }}
+                                <!-- <SimpleProfile :profileImage="selectedPerformance.clubs[0].club_image" 
+                                    :profileName="selectedPerformance.clubs[0].club_name" />  -->
+                                </td>                            
+                                <PerformanceDetail :performanceId="selectedPerformance.id"/>
                             </tr>
                         </tbody>
                     </table>
@@ -27,17 +34,19 @@
                     </div>
                 </div> 
             </div>
-        </div>
+        </div> 
     </div>
 </template>
 
 <script>
+// import SimpleProfile from '@/components/SimpleProfile'
 import PerformanceDetail from '../performances/PerformanceDetail'
 
 export default {
     name: 'CalendarTable',
-    component: {
+    components: {
         PerformanceDetail,
+        // SimpleProfile,
     },
     data() {
         return {
@@ -65,6 +74,9 @@ export default {
                 this.moreBtn = true
             }
         },
+        moveToClubPage(clubId){
+			this.$router.push({ name: 'ClubDetailView', params: { 'clubId': clubId } })
+		},
     },
     computed: {
         selectedPerformances() {
@@ -81,6 +93,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.performance-title:hover {
+    cursor: pointer;
+}
 </style>
