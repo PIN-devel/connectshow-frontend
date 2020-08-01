@@ -55,6 +55,7 @@
                 :key="review.id"
                 :review="review"
                 @review-delete="reviewDelete"
+                @review-update="reviewUpdate"
               />
             </div>
           </div>
@@ -74,47 +75,46 @@ import SimpleProfile from "../SimpleProfile";
 
 const SERVER_URL = "http://127.0.0.1:8000/";
 
-
 export default {
   name: "PerformanceDetail",
   props: {
-    performanceId: Number
+    performanceId: Number,
   },
   components: {
     Review,
     ReviewInputForm,
     SimpleProfile,
-    StarRating
+    StarRating,
   },
   data() {
     return {
       performance: {},
-      reviews: []
+      reviews: [],
     };
   },
   methods: {
     fetchPerformance() {
       axios
         .get(`${SERVER_URL}performances/${this.performanceId}/`)
-        .then(res => {
+        .then((res) => {
           this.performance = res.data.data;
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
     fetchReviews() {
       axios
         .get(`${SERVER_URL}performances/${this.performanceId}/reviews/`)
-        .then(res => {
+        .then((res) => {
           this.reviews = res.data.data;
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
     reviewCreate(reviewData) {
       console.log(reviewData);
       const config = {
         headers: {
-          Authorization: `Token ${this.$cookies.get('auth-token')}`
-        }
+          Authorization: `Token ${this.$cookies.get("auth-token")}`,
+        },
       };
       axios
         .post(
@@ -122,25 +122,30 @@ export default {
           reviewData,
           config
         )
-        .then(res => {
+        .then((res) => {
           this.reviews.push(res.data.data);
           reviewData.content = "";
           reviewData.point = 0;
+          this.performance.avg_rank = res.data.avg;
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
-    reviewDelete(reviewId) {
-      const tmpForIdx = this.reviews.find(function(item) {
+    reviewDelete(reviewId, avgRank) {
+      const tmpForIdx = this.reviews.find(function (item) {
         return item.id == reviewId;
       });
       const idx = this.reviews.indexOf(tmpForIdx);
       this.reviews.splice(idx, 1);
-    }
+      this.performance.avg_rank = avgRank;
+    },
+    reviewUpdate(avgRank) {
+      this.performance.avg_rank = avgRank;
+    },
   },
   created() {
     this.fetchPerformance();
     this.fetchReviews();
-  }
+  },
 };
 </script>
 <style scoped>
