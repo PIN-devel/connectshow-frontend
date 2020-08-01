@@ -33,48 +33,49 @@ import { StarRating } from "vue-rate-it";
 import SimpleProfile from "../SimpleProfile";
 import ReviewInputForm from "./ReviewInputForm";
 
-
 const SERVER_URL = "http://127.0.0.1:8000/";
 
 export default {
   name: "Review",
   props: {
-    review: Object
+    review: Object,
   },
   components: {
     SimpleProfile,
     ReviewInputForm,
-    StarRating
+    StarRating,
   },
   data() {
     return {
-      updateState: false
+      updateState: false,
     };
   },
 
   methods: {
     reviewDelete() {
       const config = {
-                        headers: {
-                          Authorization: `Token ${this.$cookies.get('auth-token')}`
-                        }
-                      };                                  
+        headers: {
+          Authorization: `Token ${this.$cookies.get("auth-token")}`,
+        },
+      };
       const reviewId = this.review.id;
       axios
         .delete(`${SERVER_URL}performances/reviews/${reviewId}/`, config)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-      this.$emit("review-delete", reviewId);
+        .then((res) => {
+          const avgRank = res.data.avg;
+          this.$emit("review-delete", reviewId, avgRank);
+        })
+        .catch((err) => console.log(err));
     },
     reviewUpdateToggle() {
       this.updateState = !this.updateState;
     },
     reviewUpdate(reviewData) {
       const config = {
-                  headers: {
-                    Authorization: `Token ${this.$cookies.get('auth-token')}`
-                  }
-                }; 
+        headers: {
+          Authorization: `Token ${this.$cookies.get("auth-token")}`,
+        },
+      };
       const reviewId = this.review.id;
       axios
         .put(
@@ -82,13 +83,16 @@ export default {
           reviewData,
           config
         )
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .then((res) => {
+          const avgRank = res.data.avg;
+          this.$emit("review-update", avgRank);
+        })
+        .catch((err) => console.log(err));
       this.updateState = false;
       this.review.content = reviewData.content;
       this.review.point = reviewData.point;
-    }
-  }
+    },
+  },
 };
 </script>
 
