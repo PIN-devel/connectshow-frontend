@@ -43,7 +43,7 @@
 
     <div class="col-12">
       <div class="perfs-max-h row no-gutters border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="p-4 position-static text-left">
+        <div class="w-100 p-4 position-static text-left">
           <strong class="d-inline-block mb-4 text-warning">My performance</strong>
           <div class="d-flex flex-wrap">
             <ClubPerformanceItem v-for="performance in user.performances" :key="`performance-${performance.id}`" :performance="performance"/>
@@ -54,7 +54,7 @@
 
     <div class="col-12">
       <div class="perfs-max-h row no-gutters border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="p-4 position-static text-left">
+        <div class="w-100 p-4 position-static text-left">
           <strong class="d-inline-block mb-4 text-warning">Like performance</strong>
           <div class="d-flex flex-wrap">
             <ClubPerformanceItem v-for="performance in user.like_performances" :key="`performance-${performance.id}`" :performance="performance"/>
