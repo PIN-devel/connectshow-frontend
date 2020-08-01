@@ -1,14 +1,14 @@
 <template>
   <div class=" text-left m-5 pb-5 row">
     <div class="col-md-6">
-      <div class="clubs row no-gutters border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="p-4 position-static text-left">
+      <div class="clubs row no-gutters border rounded overflow-auto mb-4 shadow-sm h-md-250 flex-md-row position-relative">
+        <div class="w-100 p-3 position-static text-left">
           <div class="d-flex justify-content-between">
             <strong class="d-inline-block mb-3 text-success">My club</strong>
             <i @click="moveToClubCreate" class="fas fa-plus" style="cursor:pointer; color:green;"></i>
           </div>
-          <div class="d-flex flex-wrap row px-2">
-            <div class="border-0 text-center py-2 col-lg-3 col-md-6 col-sm-4 col-6" v-for="club in user.clubs" :key="club.id">
+          <div class="d-flex flex-wrap row px-3">
+            <div class="p-0 border-0 text-center py-2 col-lg-3 col-md-6 col-sm-4 col-6" v-for="club in user.clubs" :key="club.id">
             <div class="d-flex flex-column">
               <div class="m-auto" @click="moveToClubPage(club.id)">
                 <ProfileImage :profileImage="club.club_image"/>
@@ -24,10 +24,10 @@
 
     <div class="col-md-6">
       <div class="clubs row no-gutters border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="p-4 position-static text-left">
+        <div class="w-100 p-4 position-static text-left">
           <strong class="d-inline-block mb-3 text-success">Follow club</strong>
-          <div class="d-flex flex-wrap row px-2">
-            <div class="border-0 text-center py-2 col-lg-3 col-md-6 col-sm-4 col-6" v-for="club in user.follow_clubs" :key="club.id">
+          <div class="d-flex flex-wrap row px-3">
+            <div class="p-0 border-0 text-center py-2 col-lg-3 col-md-6 col-sm-4 col-6" v-for="club in user.follow_clubs" :key="club.id">
             <div class="d-flex flex-column">
               <div class="m-auto" @click="moveToClubPage(club.id)">
                 <ProfileImage :profileImage="club.club_image"/>
