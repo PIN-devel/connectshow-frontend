@@ -1,11 +1,16 @@
 <template>
-    <div class="container">
+
+        <div class="container p-3 genre-div">
+            <div class="row justify-content-center">
+                <PerformanceListItem v-for="performance in performances" 
+                :key="performance.id" :performance="performance"/>
+            </div>
+    </div>
       
-      <div class="row">
+    <!-- <div class="row">
           <PerformanceListItem v-for="performance in performances" 
             :key="performance.id" :performance="performance"/>
-        </div>
-    </div>
+    </div> -->
 </template>
 
 <script>
