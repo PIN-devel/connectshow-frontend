@@ -1,5 +1,44 @@
 <template>
-  <div>
+  <ul class="list-group p-3">
+    <div class="list-group-item">
+      <div class="row">
+        <div class="col-4 d-flex">
+          <b-avatar variant="secondary" :src="profileImage" size="2.5rem"></b-avatar>
+          <h6 class="my-auto font-weight-bold mr-2">{{ review.user.username }}</h6>
+        </div>
+        <div class="col-8">
+          <b-form-rating
+            id="rating-inline"
+            inline
+            v-model="review.point"
+            readonly
+            variant="warning"
+            class="w-75"
+            no-border="true"
+          ></b-form-rating>
+        </div>
+      </div>
+
+      <div class="row w-100">
+        <div class="col-7">
+          <p>{{ review.content }}</p>
+        </div>
+        <div class="col-5">
+          <button class="btn btn-link" @click="reviewDelete">삭제</button>
+        </div>
+        <!-- <div class="col-10 pl-2" style="word-break:break-all">
+          <div class="d-flex flex-wrap justify-content-between">
+            <div class="ml-auto">
+              <button class="btn btn-link" @click="reviewDelete">삭제</button>
+            </div>
+          </div>
+        <p>{{ review.content }}</p>-->
+        <!-- <span class="text-secondary">{{ review.updated_at }}</span> -->
+        <!-- <hr> -->
+      </div>
+    </div>
+  </ul>
+  <!-- </div>
     <ul class="list-group">
       <li class="list-group-item">
         <SimpleProfile
@@ -23,15 +62,15 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div>-->
 </template>
 
 <script>
 import axios from "axios";
-import { StarRating } from "vue-rate-it";
+// import { StarRating } from "vue-rate-it";
 
-import SimpleProfile from "../SimpleProfile";
-import ReviewInputForm from "./ReviewInputForm";
+// import SimpleProfile from "../SimpleProfile";
+// import ReviewInputForm from "./ReviewInputForm";
 
 const SERVER_URL = "http://127.0.0.1:8000/";
 
@@ -41,9 +80,9 @@ export default {
     review: Object,
   },
   components: {
-    SimpleProfile,
-    ReviewInputForm,
-    StarRating,
+    // SimpleProfile,
+    // ReviewInputForm,
+    // StarRating,
   },
   data() {
     return {
