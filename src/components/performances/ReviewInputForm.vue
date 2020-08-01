@@ -1,33 +1,42 @@
 <template>
   <div>
-    <input type="text" v-model="reviewData.content" />
-    <br />
-
-    <StarRating :item-size="20" v-model="reviewData.point" :show-rating="false" />
-    <button @click="reviewCU">작성</button>
+    <b-form-rating
+      id="rating-inline"
+      inline
+      v-model="reviewData.point"
+      variant="warning"
+      class="w-75"
+      no-border="true"
+    ></b-form-rating>
+    <div class="d-flex">
+      <input
+        v-model="reviewData.content"
+        @keypress.enter="reviewCU"
+        type="text"
+        class="form-control m-3"
+        placeholder="Write a review"
+      />
+      <i class="far fa-paper-plane fa-lg my-auto cursor px-2" @click="reviewCU"></i>
+    </div>
   </div>
 </template>
 
 <script>
-import { StarRating } from "vue-rate-it";
-
 export default {
   name: "ReviewInputForm",
   props: {
     performanceId: Number,
     state: String,
     text: String,
-    point: [Number, String]
+    point: [Number, String],
   },
-  components: {
-    StarRating
-  },
+  components: {},
   data() {
     return {
       reviewData: {
         point: 0,
-        content: ""
-      }
+        content: "",
+      },
     };
   },
   methods: {
@@ -39,11 +48,11 @@ export default {
     fetchForm() {
       this.reviewData.content = this.text;
       this.reviewData.point = this.point;
-    }
+    },
   },
   created() {
     this.fetchForm();
-  }
+  },
 };
 </script>
 
