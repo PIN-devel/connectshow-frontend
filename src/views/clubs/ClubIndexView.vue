@@ -21,22 +21,17 @@
             <ClubsListitems :club="club"/>
         </tbody>
     </table>
-        <scroll-top
-        :locationX="locationX"
-        :locationY="locationY"
-        :dataX="dataX"
-        :dataY="dataY"
-        :text="text"
-        @click="goscroll" 
-        />
-        <div class="my-5">
-            <div v-if="searchFlag">
-                <p class="my-5">No results :)</p>
-            </div>
-            <div v-if="!searchFlag">
-                <infinite-loading  class="my-5" v-if="Clubs.length" @infinite="infiniteHandler"></infinite-loading>
-            </div>
+    <div class="d-flex flex-row-reverse">
+        <button type="button" class="fixed-Bottom btn btn-info" @click="scrollTop">▲</button>
+    </div>
+    <div class="my-5">
+        <div v-if="searchFlag">
+            <p class="my-5">No results :)</p>
         </div>
+        <div v-if="!searchFlag">
+            <infinite-loading  class="my-5" v-if="Clubs.length" @infinite="infiniteHandler"></infinite-loading>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -47,7 +42,6 @@ const BACK_URL = 'http://127.0.0.1:8000'
 import ClubSearch from '@/components/clubs/ClubSearch.vue'
 import ClubsListitems from '@/components/clubs/ClubsListitems.vue'
 import InfiniteLoading from 'vue-infinite-loading'
-import ScrollTop from 'vue-slim-scrolltop';
 
 
 
@@ -57,7 +51,6 @@ export default {
         ClubsListitems,
         ClubSearch,
         InfiniteLoading,
-        ScrollTop,
     },
     data(){
         return{
@@ -66,20 +59,15 @@ export default {
             searchFlag:false,
             locationX: 'left',
             locationY: 'bottom',
-            dataX: '',
-            dataY: '',
+            dataX: 0,
+            dataY: 0,
             text: 'Scroll to Top (Custom Text)',
         }
     },
     methods:{
-        goscroll(){
-            console.log(456789123)
-            setTimeout(() => {
-                this.dataX = '',
-                this.dataY = ''
-            }, 1000);
-            console.log(this.dataX)
-        },
+        scrollTop() {
+            window.scrollTo(0, 0);
+            },
         getClubs(){
             this.searchFlag = false
             const options = {params: {_page: this.page}}
@@ -142,5 +130,9 @@ export default {
 </script>
 
 <style>
-
+    .fixed-Bottom {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    }
 </style>
