@@ -9,22 +9,35 @@
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header w-100 d-flex justify-content-between">
-          <h5 class="modal-title" id="exampleModalLabel">{{performance.title}}</h5>
-          <span class="badge badge-secondary">{{performance.category.name}}</span>
-          <div v-for="club in performance.clubs" :key="club.id">
-            <SimpleProfile :profileImage="club.club_image" :profileName="club.club_name" />
+        <div class="modal-header">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <h5 class="modal-title" id="exampleModalLabel">{{performance.title}}</h5>
+              </div>
+              <div class="col"><a :href="performance.url" class="btn btn-outline-secondary btn-sm">보러가기</a></div>
+              <div class="col">
+                <div v-for="club in performance.clubs" :key="club.id">
+                  <SimpleProfile :profileImage="club.club_image" :profileName="club.club_name" />
+                </div>
+              </div>
+              <div class="col">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <span class="badge badge-primary">
+                  {{performance.category.name}}
+                </span>
+              </div>
+              <div class="col">
+                <i class="fas fa-star" style="color:yellow"></i>{{performance.avg_rank}}
+              </div>
+            </div>
           </div>
-          <a :href="performance.url" class="btn btn-outline-secondary btn-sm">보러가기</a>
-          <StarRating
-            :item-size="20"
-            :read-only="true"
-            :rating="performance.avg_rank"
-            :show-rating="false"
-          />
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
 
         <div class="modal-body">
@@ -67,7 +80,6 @@
 
 <script>
 import axios from "axios";
-import { StarRating } from "vue-rate-it";
 
 import Review from "./Review";
 import ReviewInputForm from "./ReviewInputForm";
@@ -84,7 +96,6 @@ export default {
     Review,
     ReviewInputForm,
     SimpleProfile,
-    StarRating,
   },
   data() {
     return {
