@@ -136,7 +136,6 @@ export default {
     right: 10px;
     bottom: 10px;
     z-index: 9999;
-<<<<<<< HEAD
 }
 .title-line-divider {
   width: 80px;
@@ -144,8 +143,4 @@ export default {
   margin: 0 auto;
   margin-bottom: 50px;
 }
-=======
-    }
-
->>>>>>> 7f09114db89e06b649b7127c59e6aee3e064f0be
 </style>
