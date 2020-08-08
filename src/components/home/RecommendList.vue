@@ -14,7 +14,6 @@
           :key="i"
           :image="slide.image"/>
       </vueper-slides>
-
   </div>
 </template>
 
@@ -38,58 +37,31 @@ export default {
         recommendations: [],
         slides: [
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
-            image: require('@/assets/images/poster10.jpg')
+            image: require('@/assets/images/poster14.jpg')
           },
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
             image: require('@/assets/images/poster11.jpg')
           },
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
             image: require('@/assets/images/poster12.jpg')
           },
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
             image: require('@/assets/images/poster16.jpg')
           },
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
             image: require('@/assets/images/poster17.jpg')
           },
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
             image: require('@/assets/images/poster22.jpg')
           },
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
             image: require('@/assets/images/poster23.jpg')
           },
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
-            image: require('@/assets/images/poster08.jpg')
+            image: require('@/assets/images/poster10.jpg')
           },
           {
-            title: 'El Teide Volcano, Spain',
-            content: 'Photo by Max Rive',
-            // You can also provide a URL for the image.
-            image: require('@/assets/images/poster09.png')
+            image: require('@/assets/images/poster24.jpg')
           },
         ]
       }
