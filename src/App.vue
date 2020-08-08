@@ -19,13 +19,13 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <router-link to="/" class="nav-link">Home</router-link>
+                <router-link to="/" :class="{'my-nav-link': (this.$route.name==='Home')}" class="nav-link">Home</router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/clubindex" class="nav-link">Clubs</router-link>
+                <router-link to="/clubindex" :class="{'my-nav-link': (this.$route.name==='ClubIndexView')}" class="nav-link">Clubs</router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/calendar" class="nav-link">Calendar</router-link>
+                <router-link to="/calendar" :class="{'my-nav-link': (this.$route.name==='CalendarView')}" class="nav-link">Calendar</router-link>
               </li>
               <li class="nav-item">
                 <Login @submit-login-data="login" v-if="!isLoggedIn"/>
@@ -211,7 +211,14 @@ html, body {
 #nav a.router-link-exact-active {
   /* color: #42b983; */
 }
+.my-nav-link{
+border-bottom: solid;
+color: black;
+border-color:#FF8A3E;
+}
+.myactive{
 
+}
 .dialog .vc-btn {
   color: white;
   background-color: #42b983;
