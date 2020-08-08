@@ -2,9 +2,9 @@
 <div>
   <div id="app" class="m-0">
     <div id="nav" class="p-0 mb-5">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container">
-          <router-link to="/" class="navbar-brand">Connect Show</router-link>
+          <router-link to="/" class="navbar-brand p-0"><img src="./assets/nav-logo.png" style="height: 56px"></router-link>
           <button
             class="navbar-toggler"
             type="button"
