@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-row">
     <input class="form-control" v-model="keyword" @keypress.enter="searchClub" type="Search" placeholder="Search Club name" aria-label="Search">
-    <button class="btn btn-info" type="button" @click="searchClub"><i class="fas fa-search"></i></button>
+    <button class="btn" style="background-color: #FF8A3E; color:white;" type="button" @click="searchClub"><i class="fas fa-search" ></i></button>
   </div>
 </template>
 

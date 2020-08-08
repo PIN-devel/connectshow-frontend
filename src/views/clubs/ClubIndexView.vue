@@ -2,7 +2,7 @@
 <div class="container">
     <h1>Club List</h1>
     <div class="d-flex flex-row-reverse">
-    <button class="btn btn-info mb-5" @click="clubCreate">club create</button>
+    <button class="btn mb-5" style="background-color: #FF8A3E; color:white;" @click="clubCreate">club create</button>
     </div>
     <ClubSearch @search-clubs="searchClubs"/>
     <div class="d-flex flex-row-reverse" v-if="searchFlag">
@@ -22,11 +22,11 @@
         </tbody>
     </table>
     <div class="d-flex flex-row-reverse">
-        <button type="button" class="fixed-Bottom btn btn-info" @click="scrollTop">▲</button>
+        <button type="button" class="fixed-Bottom btn" style="background-color: #FF8A3E; color:white;" @click="scrollTop">▲</button>
     </div>
     <div class="my-5">
         <div v-if="searchFlag">
-            <p class="my-5">No results :)</p>
+            <p class="my-5">No results :(</p>
         </div>
         <div v-if="!searchFlag">
             <infinite-loading  class="my-5" v-if="Clubs.length" @infinite="infiniteHandler"></infinite-loading>
@@ -136,4 +136,5 @@ export default {
     bottom: 10px;
     z-index: 9999;
     }
+
 </style>
