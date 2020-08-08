@@ -23,11 +23,11 @@
       </div>
 
       <div class="row w-100">
-        <div class="col-5"></div>
-        <div class="col-5 text-left">
-          <p>{{ review.content }}</p>
+        <div class="col-1"></div>
+        <div class="col-9 text-left p-0">
+          <p style="word-break: break-all;">{{ review.content }}</p>
         </div>
-        <div class="col-2 d-flex align-items-end">
+        <div class="col-1 d-flex align-items-end p-0">
           <button class="btn text-muted" @click="reviewDelete"><i class="far fa-trash-alt"></i></button>
         </div>
 

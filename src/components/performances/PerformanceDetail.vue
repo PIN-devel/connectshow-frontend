@@ -33,7 +33,7 @@
           <div class="container">
             <div class="row">
               <div class="col-7  p-0">
-                <img :src="'http://127.0.0.1:8000'+performance.poster_image" alt class="w-100" />
+                <img :src="'http://127.0.0.1:8000'+performance.poster_image" style="height: 400px; width: auto" />
                 <div class="modal-scroll1">
 
                   <div class="row w-100 px-3 py-1">
