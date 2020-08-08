@@ -195,6 +195,9 @@ export default {
 }
 html, body {
   height: 100vh;
+  /* background-color: black !important;
+  color: white !important; */
+
 }
 
 #nav {

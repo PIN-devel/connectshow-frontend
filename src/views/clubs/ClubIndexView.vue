@@ -1,6 +1,7 @@
 <template>
 <div class="container">
-    <h1>Club List</h1>
+    <h2 class="my-4">Club List</h2>
+    <div class="title-line-divider"></div>
     <div class="d-flex flex-row-reverse">
     <button class="btn btn-info mb-5" @click="clubCreate">club create</button>
     </div>
@@ -130,10 +131,16 @@ export default {
 </script>
 
 <style>
-    .fixed-Bottom {
+.fixed-Bottom {
     position: fixed;
     right: 10px;
     bottom: 10px;
     z-index: 9999;
-    }
+}
+.title-line-divider {
+  width: 80px;
+  border-top: 2px solid #FF8A3D;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
 </style>
