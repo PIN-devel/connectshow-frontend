@@ -1,7 +1,7 @@
 <template>
     <div class="border-bottom shadow-sm mb-3">
       <div class="row w-100">
-        <div class="col-2 p-0 pl-3">
+        <div class="col-3 p-0 pl-3">
           <b-avatar variant="secondary" :src="profileImage" size="2.5rem" ></b-avatar>
         </div>
 
@@ -9,7 +9,7 @@
           <h6 class="font-weight-bold" style="line-height: 40px;">{{ review.user.username }}</h6>
         </div>
 
-        <div class="col-7 p-0">
+        <div class="col-6 p-0">
           <b-form-rating
             id="rating-inline"
             inline
