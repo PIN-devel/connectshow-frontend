@@ -21,7 +21,7 @@
               {{performance.avg_rank}}
             </div>
             <div>
-              <a :href="performance.url" class="btn btn-outline-secondary btn-sm">보러가기</a>
+              <a :href="performance.url" class="btn btn-outline-danger btn-sm"><i class="far fa-play-circle"></i> 보러가기</a>
             </div>
           </div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -32,76 +32,81 @@
         <div class="modal-body">
           <div class="container">
             <div class="row">
-              <div class="col-7 modal-scroll p-0">
+              <div class="col-7  p-0">
                 <img :src="'http://127.0.0.1:8000'+performance.poster_image" alt class="w-100" />
-                <div class="row w-100 px-3 py-1">
-                  <div class="col-2 p-0">기간</div>
-                  <div class="col-1 p-0">:</div>
-                  <div
-                    class="col-9 p-0 text-left"
-                  >{{performance.start_date}} ~ {{performance.end_date}}</div>
-                </div>
-                <div class="row w-100 px-3 py-1">
-                  <div class="col-2 p-0">공연 시간</div>
-                  <div class="col-1 p-0">:</div>
-                  <div class="col-9 p-0 text-left">{{performance.time}}</div>
-                </div>
-                <div class="row w-100 px-3 py-1">
-                  <div class="col-2 p-0">관람 시간</div>
-                  <div class="col-1 p-0">:</div>
-                  <div class="col-9 p-0 text-left">{{performance.running_time}} 분</div>
-                </div>
-                <div class="row w-100 px-3 py-1">
-                  <div class="col-2 p-0">클럽</div>
-                  <div class="col-1 p-0">:</div>
-                  <div class="col-9 p-0 text-left">
-                    <div v-for="club in performance.clubs" :key="club.id">
-                      <SimpleProfile :profileImage="club.club_image" :profileName="club.club_name" />
+                <div class="modal-scroll1">
+
+                  <div class="row w-100 px-3 py-1">
+                    <div class="col-2 p-0">기간</div>
+                    <div class="col-1 p-0">:</div>
+                    <div
+                      class="col-9 p-0 text-left"
+                    >{{performance.start_date}} ~ {{performance.end_date}}</div>
+                  </div>
+                  <div class="row w-100 px-3 py-1">
+                    <div class="col-2 p-0">공연 시간</div>
+                    <div class="col-1 p-0">:</div>
+                    <div class="col-9 p-0 text-left">{{performance.time}}</div>
+                  </div>
+                  <div class="row w-100 px-3 py-1">
+                    <div class="col-2 p-0">관람 시간</div>
+                    <div class="col-1 p-0">:</div>
+                    <div class="col-9 p-0 text-left">{{performance.running_time}} 분</div>
+                  </div>
+                  <div class="row w-100 px-3 py-1">
+                    <div class="col-2 p-0">클럽</div>
+                    <div class="col-1 p-0">:</div>
+                    <div class="col-9 p-0 text-left">
+                      <div v-for="club in performance.clubs" :key="club.id">
+                        <SimpleProfile :profileImage="club.club_image" :profileName="club.club_name" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row w-100 px-3 py-1">
+                    <div class="col-2 p-0">출연</div>
+                    <div class="col-1 p-0">:</div>
+                    <div class="col-9 p-0 text-left">
+                      <a
+                        href
+                        v-for="user in performance.cast.user"
+                        :key="user.user_id"
+                      >{{user.username}},</a>
+                      <span
+                        v-for="non_user in performance.cast.non_user"
+                        :key="non_user.username"
+                      >{{non_user.username}},</span>
+                    </div>
+                  </div>
+                  <div class="row w-100 px-3 py-1">
+                    <div class="col-2 p-0">장르</div>
+                    <div class="col-1 p-0">:</div>
+                    <div class="col-9 p-0 text-left">
+                      <span class="badge badge-primary">{{performance.category.name}}</span>
+                    </div>
+                  </div>
+                  <div class="row w-100 px-3 py-1">
+                    <div class="col-2 p-0">설명</div>
+                    <div class="col-1 p-0">:</div>
+                    <div class="col-9 p-0 text-left">
+                      <div
+                        class="description"
+                        v-html="performance.description"
+                        style="white-space:normal"
+                      ></div>
                     </div>
                   </div>
                 </div>
-                <div class="row w-100 px-3 py-1">
-                  <div class="col-2 p-0">출연</div>
-                  <div class="col-1 p-0">:</div>
-                  <div class="col-9 p-0 text-left">
-                    <a
-                      href
-                      v-for="user in performance.cast.user"
-                      :key="user.user_id"
-                    >{{user.username}},</a>
-                    <span
-                      v-for="non_user in performance.cast.non_user"
-                      :key="non_user.username"
-                    >{{non_user.username}},</span>
-                  </div>
-                </div>
-                <div class="row w-100 px-3 py-1">
-                  <div class="col-2 p-0">장르</div>
-                  <div class="col-1 p-0">:</div>
-                  <div class="col-9 p-0 text-left">
-                    <span class="badge badge-primary">{{performance.category.name}}</span>
-                  </div>
-                </div>
-                <div class="row w-100 px-3 py-1">
-                  <div class="col-2 p-0">설명</div>
-                  <div class="col-1 p-0">:</div>
-                  <div class="col-9 p-0 text-left">
-                    <div
-                      class="description"
-                      v-html="performance.description"
-                      style="white-space:normal"
-                    ></div>
-                  </div>
-                </div>
               </div>
-              <div class="col-5 modal-scroll p-0">
-                <Review
-                  v-for="review in reviews"
-                  :key="review.id"
-                  :review="review"
-                  @review-delete="reviewDelete"
-                  @review-update="reviewUpdate"
-                />
+              <div class="col-5 p-0">
+                <div class="modal-scroll2">
+                  <Review
+                    v-for="review in reviews"
+                    :key="review.id"
+                    :review="review"
+                    @review-delete="reviewDelete"
+                    @review-update="reviewUpdate"
+                  />
+                </div>
                 <ReviewInputForm state="create" @review-create="reviewCreate" />
               </div>
             </div>
@@ -197,20 +202,16 @@ export default {
 .description {
   word-break: break-all;
 }
-.modal-scroll {
+.modal-scroll1 {
   overflow: auto;
-  height: 600px;
+  height: 200px;
 }
-.modal-scroll::-webkit-scrollbar {
-  width: 5px;
+.modal-scroll2 {
+  overflow: auto;
+  height: 500px;
 }
-.modal-scroll::-webkit-scrollbar-thumb {
-  background-color: #ff8a3e;
-  border-radius: 5px;
-}
-.modal-scroll::-webkit-scrollbar-track {
-  background-color: rgb(201, 201, 201);
-  border-radius: 5px;
-  box-shadow: inset 0px 0px 3px white;
+.modal-scroll1::-webkit-scrollbar,
+.modal-scroll2::-webkit-scrollbar {
+  display:none;
 }
 </style>
