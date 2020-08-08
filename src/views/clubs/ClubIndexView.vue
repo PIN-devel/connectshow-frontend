@@ -3,7 +3,7 @@
     <h2 class="my-4">Club List</h2>
     <div class="title-line-divider"></div>
     <div class="d-flex flex-row-reverse">
-    <button class="btn btn-info mb-5" @click="clubCreate">club create</button>
+    <button class="btn mb-5" style="background-color: #FF8A3E; color:white;" @click="clubCreate">club create</button>
     </div>
     <ClubSearch @search-clubs="searchClubs"/>
     <div class="d-flex flex-row-reverse" v-if="searchFlag">
@@ -23,11 +23,11 @@
         </tbody>
     </table>
     <div class="d-flex flex-row-reverse">
-        <button type="button" class="fixed-Bottom btn btn-info" @click="scrollTop">▲</button>
+        <button type="button" class="fixed-Bottom btn" style="background-color: #FF8A3E; color:white;" @click="scrollTop">▲</button>
     </div>
     <div class="my-5">
         <div v-if="searchFlag">
-            <p class="my-5">No results :)</p>
+            <p class="my-5">No results :(</p>
         </div>
         <div v-if="!searchFlag">
             <infinite-loading  class="my-5" v-if="Clubs.length" @infinite="infiniteHandler"></infinite-loading>
@@ -136,6 +136,7 @@ export default {
     right: 10px;
     bottom: 10px;
     z-index: 9999;
+<<<<<<< HEAD
 }
 .title-line-divider {
   width: 80px;
@@ -143,4 +144,8 @@ export default {
   margin: 0 auto;
   margin-bottom: 50px;
 }
+=======
+    }
+
+>>>>>>> 7f09114db89e06b649b7127c59e6aee3e064f0be
 </style>
