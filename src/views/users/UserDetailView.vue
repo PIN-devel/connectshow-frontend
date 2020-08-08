@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <UserProfile :user="user" :isAuth="isAuth" class="container m-5"/>
     <div class="mx-5">
       <hr>

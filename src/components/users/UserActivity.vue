@@ -8,7 +8,7 @@
             <i @click="moveToClubCreate" class="fas fa-plus" style="cursor:pointer; color:green;"></i>
           </div>
           <div class="d-flex flex-wrap row px-3">
-            <div class="p-0 border-0 text-center py-2 col-lg-3 col-md-6 col-sm-4 col-6" v-for="club in user.clubs" :key="club.id">
+            <div class="p-0 border-0 text-center py-2 col-lg-4 col-md-6 col-sm-4 col-6" v-for="club in user.clubs" :key="club.id">
             <div class="d-flex flex-column">
               <div class="m-auto" @click="moveToClubPage(club.id)">
                 <ProfileImage :profileImage="club.club_image"/>
@@ -27,7 +27,7 @@
         <div class="w-100 p-3 position-static text-left">
           <strong class="d-inline-block mb-3 text-success">Follow club</strong>
           <div class="d-flex flex-wrap row px-3">
-            <div class="p-0 border-0 text-center py-2 col-lg-3 col-md-6 col-sm-4 col-6" v-for="club in user.follow_clubs" :key="club.id">
+            <div class="p-0 border-0 text-center py-2 col-lg-4 col-md-6 col-sm-4 col-6" v-for="club in user.follow_clubs" :key="club.id">
             <div class="d-flex flex-column">
               <div class="m-auto" @click="moveToClubPage(club.id)">
                 <ProfileImage :profileImage="club.club_image"/>

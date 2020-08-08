@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <ClubProfile class="container m-5" @member-change="memberChange" :userState="userState" :isFollow="isFollow" :followNum="followNum" :isMaster="isMaster" :club="club"/>
     <div>
       <ul class="nav nav-tabs nav-justified md-tabs indigo" id="myTabJust" role="tablist">
