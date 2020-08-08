@@ -60,7 +60,7 @@ export default {
 <style scoped>
 .title-line-divider {
   width: 80px;
-  border-top: 2px solid #FF8A3D;
+  border-top: 4px solid #FF8A3D;
   margin: 0 auto;
   margin-bottom: 50px;
 }

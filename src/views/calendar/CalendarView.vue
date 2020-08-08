@@ -1,6 +1,8 @@
 <template>
     <div class="container">
       <!-- Category 선택 -->
+      <h2 class="my-4">Calendar</h2>
+      <div class="title-line-divider"></div>
       <div class="select-box">
         <vue-single-select
           placeholder="카테고리 선택"
@@ -213,5 +215,10 @@ a {
 .select-box {
   width: 200px;
 }
-
+.title-line-divider {
+  width: 80px;
+  border-top: 4px solid #FF8A3D;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
 </style>
