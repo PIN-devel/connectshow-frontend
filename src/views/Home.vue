@@ -2,6 +2,7 @@
   <div>
     <RecommendList />
     <div class="container">
+      <h3 class="text-center my-4">Performances</h3>
       <Categories @select-category="selectCategory"/>
       <PerformanceList :performances="performances"/>
     </div>
