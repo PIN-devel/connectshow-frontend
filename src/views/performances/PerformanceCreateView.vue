@@ -57,8 +57,15 @@
       </div>
       <!-- poster_image v-on:change="performanceimage()" -->
       <div class="form-group">
+        <img v-if="imageUrl" :src="imageUrl" alt />
         <label for="exampleFormControlFile1">포스터</label>
-        <b-form-file type="file" id="file" ref="file" v-model="performance.poster_image"></b-form-file>
+        <b-form-file
+          type="file"
+          id="file"
+          ref="file"
+          v-model="performance.poster_image"
+          @change="onChangeImages"
+        ></b-form-file>
       </div>
       <!-- description -->
       <div class="form-group">
@@ -128,6 +135,11 @@ export default {
     deleteMemberId(Id) {
       const idx = this.performance.user_ids.indexOf(Id);
       this.performance.user_ids.splice(idx, 1);
+    },
+    onChangeImages(e) {
+      console.log(e.target.files);
+      const file = e.target.files[0];
+      this.imageUrl = URL.createObjectURL(file);
     },
     createperformance() {
       const axiosConfig = {
