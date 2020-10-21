@@ -1,24 +1,31 @@
-# solgik_frontend
+# 커넥쇼
 
-## Project setup
-```
+![image-20201022000019442](readme.assets/image-20201022000019442.png)
+
+![image-20201021235843858](readme.assets/image-20201021235843858.png)
+
+![image-20201021235853730](readme.assets/image-20201021235853730.png)
+
+![image-20201021235904912](readme.assets/image-20201021235904912.png)
+
+![image-20201021235914307](readme.assets/image-20201021235914307.png)
+
+![image-20201021235926931](readme.assets/image-20201021235926931.png)
+
+![image-20201022000036476](readme.assets/image-20201022000036476.png)
+
+![image-20201022000049146](readme.assets/image-20201022000049146.png)
+
+![image-20201022000106690](readme.assets/image-20201022000106690.png)
+
+![image-20201022000116530](readme.assets/image-20201022000116530.png)
+
+# Start
+
+```bash
 npm install
+npm run serve # npm run build (for build)
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
