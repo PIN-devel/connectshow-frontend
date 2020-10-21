@@ -3,7 +3,12 @@
     <div class="text-right" v-if="isMaster">
       <button class="btn btn-light" @click="createPerformance"><i class="fas fa-edit"></i> Performance create</button>
     </div>
-    <ClubPerformanceItem v-for="performance in performances" :key="`performance-${performance.id}`" :performance="performance" :isMaster="isMaster"/>
+    <p class="text-center mt-2" v-if="!performances.length">No results :(</p>
+    <div class="container">
+      <div class="my-5 row d-flex">
+        <ClubPerformanceItem v-for="performance in performances" :key="`performance-${performance.id}`" :performance="performance"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,7 +41,7 @@ export default {
         .catch((err) => {console.log(err.response.data)})
     },
     createPerformance(){
-      this.$router.push({ name: 'PerformanceCreate' })
+      this.$router.push({ name: 'PerformanceCreateView' })
     },
   },
   created(){

@@ -1,7 +1,7 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "@/views/Home.vue";
-import CalenderView from "@/views/CalenderView.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '@/views/Home.vue'
+import CalendarView from  '@/views/calendar/CalendarView.vue'
 
 //도연
 
@@ -28,9 +28,14 @@ const routes = [
     component: Home,
   },
   {
-    path: "/calender",
-    name: "CalenderView",
-    component: CalenderView,
+    path: "/logout",
+    name: "Home",
+    component: Home,
+  },
+  {
+    path: '/calendar',
+    name: 'CalendarView',
+    component: CalendarView
   },
   {
     path: '/profileupdate/:ID',
@@ -73,14 +78,16 @@ const routes = [
     component: ArticleCreateView,
   },
   {
-    path: "/article/:articleID",
-    name: "ArticleUpdateView",
-    component: ArticleUpdateView,
+
+    path: '/article/:articleId',
+    name: 'ArticleUpdateView',
+    component: ArticleUpdateView
   },
   {
     path: "/users/:userId",
     name: "UserDetailView",
     component: UserDetailView,
+
   },
   {
     path: '*',

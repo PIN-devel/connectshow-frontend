@@ -1,59 +1,67 @@
 <template>
+<div>
   <div id="app" class="m-0">
-    <div id="nav" class="m-0 p-0 mb-5">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <router-link to="/" class="navbar-brand">
-          <img src="@/assets/logo.png" alt style="height: 90px" />
-        </router-link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <router-link to="/" class="nav-link">Home</router-link>
-            </li>
-            <li class="nav-item">
-              <Login @submit-login-data="login" v-if="!isLoggedIn"/>
-            </li>
-            <li class="nav-item">
-              <Signup @submit-signup-data="signup" v-if="!isLoggedIn"/>
-            </li>
-            <li class="nav-item">
-              <router-link v-if="isLoggedIn" :to="{name:'UserDetailView', params:{userId:`${currentuserID}`}}" class="nav-link">{{currentuser}}님</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link
-                v-if="isLoggedIn"
-                to="/logout"
-                @click.native="logout"
-                class="nav-link"
-              >Logout</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/clubcreate" class="nav-link">clubcreate</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/calender" class="nav-link">Calender</router-link>
-            </li>
-          </ul>
+    <div id="nav" class="p-0 mb-5">
+      <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+        <div class="container">
+          <router-link to="/" class="navbar-brand p-0"><img src="./assets/nav-logo.png" style="height: 56px"></router-link>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <router-link to="/" :class="{'my-nav-link': (this.$route.name==='Home')}" class="nav-link">Home</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/clubindex" :class="{'my-nav-link': (this.$route.name==='ClubIndexView')}" class="nav-link">Clubs</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/calendar" :class="{'my-nav-link': (this.$route.name==='CalendarView')}" class="nav-link">Calendar</router-link>
+              </li>
+              <li class="nav-item">
+                <Login @submit-login-data="login" v-if="!isLoggedIn"/>
+              </li>
+              <li class="nav-item">
+                <Signup @submit-signup-data="signup" v-if="!isLoggedIn"/>
+              </li>
+              <li class="nav-item">
+                <router-link v-if="isLoggedIn" :to="{name:'UserDetailView', params:{userId:`${currentuserID}`}}" class="nav-link">{{currentuser}}님</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link
+                  v-if="isLoggedIn"
+                  to="/logout"
+                  @click.native="logout"
+                  class="nav-link"
+                >Logout</router-link>
+              </li>
+              
+            </ul>
+          </div>
         </div>
       </nav>
     </div>
-    <router-view :key="$route.fullPath"/>
+    <router-view @submit-login-data="login" @submit-signup-data="signup" :key="$route.fullPath"/>
+    <vue-confirm-dialog class="dialog"></vue-confirm-dialog>
+    <div id="place"></div>
   </div>
+  <Footer />
+</div>
+  
 </template>
 <script>
 import Login from "@/components/accounts/Login.vue"
 import Signup from "@/components/accounts/Signup.vue"
+import Footer from "@/components/home/Footer.vue"
 
 import axios from "axios";
 const BACK_URL = "http://127.0.0.1:8000";
@@ -62,6 +70,7 @@ export default {
   components:{
     Login,
     Signup,
+    Footer,
   },
   data: function() {
     return {
@@ -134,7 +143,7 @@ export default {
           this.$session.start();
           this.$session.set("jwt", response.data.key);
           this.isLoggedIn = true;
-          this.$router.push("/");
+          // this.$router.push("/");
           this.showuser();
         })
         .catch(err => {
@@ -155,6 +164,7 @@ export default {
           this.$session.destroy();
           this.isLoggedIn = false;
           this.$router.push("/");
+          this.$alert("로그아웃 완료!");
         })
         .catch(err => {
           console.log(err);
@@ -174,23 +184,60 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Jua', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100vh;
+  
+}
+html, body {
+  height: 100vh;
+  /* background-color: black !important;
+  color: white !important; */
+
 }
 
 #nav {
   padding: 30px;
+  margin-bottom: 70px;
+
 }
 
 #nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  /* font-weight: bold;
+  color: #2c3e50; */
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  /* color: #42b983; */
 }
+.my-nav-link{
+border-bottom: solid;
+color: black;
+border-color:#FF8A3E;
+}
+.myactive{
+
+}
+.dialog .vc-btn {
+  color: white;
+  background-color: #42b983;
+}
+
+.dialog .left {
+  color: #42b983;
+  background-color: white;
+}
+
+#place {
+  height: 72px;
+}
+
+.main-color-1 {
+
+}
+
 </style>

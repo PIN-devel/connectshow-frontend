@@ -75,7 +75,12 @@
       <!-- url -->
       <div class="form-group">
         <label for="url">URL</label>
-        <b-form-input :id="`type-${'url'}`" :type="'url'" v-model="performance.url"></b-form-input>
+        <b-form-input
+          :id="`type-${'url'}`"
+          :type="'url'"
+          v-model="performance.url"
+          placeholder="https://www.example.com"
+        ></b-form-input>
       </div>
     </form>
     <button type="submit" class="btn btn-primary" @click="createperformance">Submit</button>
@@ -90,7 +95,7 @@ const BACK_URL = "http://127.0.0.1:8000";
 export default {
   name: "PerformanceCreate",
   components: {
-    PerformanceCreateButton
+    PerformanceCreateButton,
   },
   data() {
     return {
@@ -106,24 +111,23 @@ export default {
         category_id: 0,
         club_id: this.$route.params.clubId,
         non_user_names: [],
-        user_ids: []
+        user_ids: [],
       },
       non_user_name: "",
       clubMembers: [],
-      imageUrl: null
     };
   },
   methods: {
     fetchClubMember() {
       const config = {
         headers: {
-          Authorization: `Token ${this.$cookies.get("auth-token")}`
-        }
+          Authorization: `Token ${this.$cookies.get("auth-token")}`,
+        },
       };
       axios
         .get(`${BACK_URL}/accounts/clubs/${this.$route.params.clubId}/`, config)
-        .then(res => (this.clubMembers = res.data.data.club_members))
-        .catch(err => console.log(err));
+        .then((res) => (this.clubMembers = res.data.data.club_members))
+        .catch((err) => console.log(err));
     },
     addMemberId(Id) {
       this.performance.user_ids.push(Id);
@@ -140,8 +144,8 @@ export default {
     createperformance() {
       const axiosConfig = {
         headers: {
-          Authorization: `Token ${this.$cookies.get("auth-token")}`
-        }
+          Authorization: `Token ${this.$cookies.get("auth-token")}`,
+        },
       };
       let performancedata = new FormData();
       performancedata.append("title", this.performance.title);
@@ -161,7 +165,7 @@ export default {
       axios
         .post(`${BACK_URL}/performances/`, performancedata, axiosConfig)
         .then(() => {})
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
@@ -173,11 +177,11 @@ export default {
         this.performance.non_user_names.push(this.non_user_name);
         this.non_user_name = "";
       }
-    }
+    },
   },
   created() {
     this.fetchClubMember();
-  }
+  },
 };
 </script>
 

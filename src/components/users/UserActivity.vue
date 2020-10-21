@@ -1,52 +1,100 @@
 <template>
-  <div class="text-left m-5">
-    <div class="my-4">
-      <h3>My club</h3>
-      <hr class="short-hr">
-      <div v-for="club in user.clubs" :key="club.id">
-        <div class="card border-0 profile text-center hovereffect">
-          <div @click="moveToClubPage(club.id)">
-            <img class="card-img" src="https://i.imgur.com/At1IG6H.png" alt="profile_image">
-            <span>{{ club.club_name }}</span>
+  <div class=" text-left m-5 pb-5 row">
+    <div class="col-md-6">
+      <div class="clubs row no-gutters border rounded overflow-auto mb-4 shadow-sm h-md-250 flex-md-row position-relative">
+        <div class="w-100 p-3 position-static text-left">
+          <div class="d-flex justify-content-between">
+            <strong class="d-inline-block mb-3 text-success">My club</strong>
+            <i @click="moveToClubCreate" class="fas fa-plus" style="cursor:pointer; color:green;"></i>
+          </div>
+          <div class="d-flex flex-wrap row px-3">
+            <div class="p-0 border-0 text-center py-2 col-lg-4 col-md-6 col-sm-4 col-6" v-for="club in user.clubs" :key="club.id">
+            <div class="d-flex flex-column">
+              <div class="m-auto" @click="moveToClubPage(club.id)">
+                <ProfileImage :profileImage="club.club_image"/>
+                <span v-if="club.club_name.length > 5">{{ club.club_name.substr(0,5) }}...</span>
+                <span v-else>{{ club.club_name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>    
+    </div>
+
+    <div class="col-md-6">
+      <div class="clubs row no-gutters border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="w-100 p-3 position-static text-left">
+          <strong class="d-inline-block mb-3 text-success">Follow club</strong>
+          <div class="d-flex flex-wrap row px-3">
+            <div class="p-0 border-0 text-center py-2 col-lg-4 col-md-6 col-sm-4 col-6" v-for="club in user.follow_clubs" :key="club.id">
+            <div class="d-flex flex-column">
+              <div class="m-auto" @click="moveToClubPage(club.id)">
+                <ProfileImage :profileImage="club.club_image"/>
+                <span v-if="club.club_name.length > 5">{{ club.club_name.substr(0,5) }}...</span>
+                <span v-else>{{ club.club_name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>    
+    </div>
+
+    <div class="col-12">
+      <div class="perfs-max-h row no-gutters border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="w-100 p-4 position-static text-left">
+          <strong class="d-inline-block mb-4 text-warning">My performance</strong>
+          <div class="d-flex flex-wrap">
+            <ClubPerformanceItem v-for="performance in user.performances" :key="`performance-${performance.id}`" :performance="performance"/>
           </div>
         </div>
       </div>
-      <div class="member-bottom"></div>
-    </div>
+    </div>  
 
-    <div class="my-4">
-      <h3>My performance</h3>
-      <hr class="short-hr">
-      <div v-for="performance in user.performances" :key="performance.id">
-        <div class="hovereffect m-2" data-toggle="modal" :data-target="'#performance-'+performance.id" width="170px" >
-          <img class="perf-img" src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/183/533/81183533_1554803873172_1_600x600.JPG" alt="poster_image">
-          <span>{{ performance.title }}</span>
-					<PerformanceDetail :performanceId="performance.id"/> 
+    <div class="col-12">
+      <div class="perfs-max-h row no-gutters border rounded overflow-auto flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="w-100 p-4 position-static text-left">
+          <strong class="d-inline-block mb-4 text-warning">Like performance</strong>
+          <div class="d-flex flex-wrap">
+            <ClubPerformanceItem v-for="performance in user.like_performances" :key="`performance-${performance.id}`" :performance="performance"/>
+          </div>
         </div>
       </div>
-    </div>
+    </div>  
   </div>
 </template>
 
 <script>
-import PerformanceDetail from '@/components/performances/PerformanceDetail'
+import ProfileImage from '@/components/ProfileImage.vue'
+import ClubPerformanceItem from '@/components/clubs/ClubPerformanceItem'
 
 export default {
   name: 'UserActivity',
   components: {
-    PerformanceDetail
+    ProfileImage,
+    ClubPerformanceItem,
   },
   props: {
     user: Object,
 	},
 	methods: {
 		moveToClubPage(clubId){
-			this.$router.push({ name: 'ClubDetail', params: { 'clubId': clubId } })
-		}
+			this.$router.push({ name: 'ClubDetailView', params: { 'clubId': clubId } })
+    },
+    moveToClubCreate(){
+      this.$router.push({ name: 'ClubCreateView' })
+    },
 	}
 }
 </script>
 
 <style>
+.clubs {
+  max-height: 210px;
+}
+.perfs-max-h {
+  max-height: 365px;
+}
 
 </style>

@@ -1,80 +1,82 @@
 <template>
-  <div>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <SimpleProfile
-          :profileName="review.user.username"
-          :profileImage="review.user.profile_image"
-        />
-
-        <StarRating :read-only="true" :item-size="20" :rating="review.point" :show-rating="false" />
-        <button @click="reviewUpdateToggle">수정</button>
-        <button @click="reviewDelete">삭제</button>
-      </li>
-      <li class="list-group-item">
-        <span v-if="!updateState">{{review.content}}</span>
-        <div v-if="updateState">
-          <ReviewInputForm
-            state="update"
-            :text="review.content"
-            :point="review.point"
-            @review-update="reviewUpdate"
-          />
+    <div class="border-bottom shadow-sm mb-3">
+      <div class="row w-100">
+        <div class="col-3 p-0 pl-3">
+          <b-avatar variant="secondary" :src="profileImage" size="2.5rem" ></b-avatar>
         </div>
-      </li>
-    </ul>
-  </div>
+
+        <div class="col-2 p-0 m-0">
+          <h6 class="font-weight-bold" style="line-height: 40px;">{{ review.user.username }}</h6>
+        </div>
+
+        <div class="col-6 p-0">
+          <b-form-rating
+            id="rating-inline"
+            inline
+            v-model="review.point"
+            readonly
+            variant="warning"
+            class="p-0"
+            no-border="true"
+          ></b-form-rating>
+        </div>
+      </div>
+
+      <div class="row w-100">
+        <div class="col-1"></div>
+        <div class="col-9 text-left p-0">
+          <p style="word-break: break-all;">{{ review.content }}</p>
+        </div>
+        <div class="col-1 d-flex align-items-end p-0">
+          <button class="btn text-muted" @click="reviewDelete"><i class="far fa-trash-alt"></i></button>
+        </div>
+
+      </div>
+    </div>
+
 </template>
 
 <script>
 import axios from "axios";
-import { StarRating } from "vue-rate-it";
-
-import SimpleProfile from "../SimpleProfile";
-import ReviewInputForm from "./ReviewInputForm";
-
 
 const SERVER_URL = "http://127.0.0.1:8000/";
 
 export default {
   name: "Review",
   props: {
-    review: Object
-  },
-  components: {
-    SimpleProfile,
-    ReviewInputForm,
-    StarRating
+    review: Object,
   },
   data() {
     return {
-      updateState: false
+      updateState: false,
     };
   },
 
   methods: {
     reviewDelete() {
       const config = {
-                        headers: {
-                          Authorization: `Token ${this.$cookies.get('auth-token')}`
-                        }
-                      };                                  
+        headers: {
+          Authorization: `Token ${this.$cookies.get("auth-token")}`,
+        },
+      };
       const reviewId = this.review.id;
       axios
         .delete(`${SERVER_URL}performances/reviews/${reviewId}/`, config)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-      this.$emit("review-delete", reviewId);
+        .then((res) => {
+          const avgRank = res.data.avg;
+          this.$emit("review-delete", reviewId, avgRank);
+        })
+        .catch((err) => console.log(err));
     },
     reviewUpdateToggle() {
       this.updateState = !this.updateState;
     },
     reviewUpdate(reviewData) {
       const config = {
-                  headers: {
-                    Authorization: `Token ${this.$cookies.get('auth-token')}`
-                  }
-                }; 
+        headers: {
+          Authorization: `Token ${this.$cookies.get("auth-token")}`,
+        },
+      };
       const reviewId = this.review.id;
       axios
         .put(
@@ -82,13 +84,16 @@ export default {
           reviewData,
           config
         )
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .then((res) => {
+          const avgRank = res.data.avg;
+          this.$emit("review-update", avgRank);
+        })
+        .catch((err) => console.log(err));
       this.updateState = false;
       this.review.content = reviewData.content;
       this.review.point = reviewData.point;
-    }
-  }
+    },
+  },
 };
 </script>
 
